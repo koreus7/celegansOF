@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxImGui.h"
 #include "point_selector.h"
-#include "beam_fitting\beam_skeleton.h"
+#include "beam_skeleton.h"
 #include <string.h>
 
 
