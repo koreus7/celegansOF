@@ -171,8 +171,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\beam_fitting\beam_skeleton.cpp" />
-    <ClCompile Include="src\beam_fitting\squared_error.cpp" />
+    <ClCompile Include="src\beam_skeleton.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\file_load.cpp" />
@@ -196,10 +195,10 @@
     <ClCompile Include="..\..\Downloads\of_v0.9.8_vs_release\of_v0.9.8_vs_release\addons\ofxOpenCv\src\ofxCvImage.cpp" />
     <ClCompile Include="..\..\Downloads\of_v0.9.8_vs_release\of_v0.9.8_vs_release\addons\ofxOpenCv\src\ofxCvShortImage.cpp" />
     <ClCompile Include="src\point_selector.cpp" />
+    <ClCompile Include="src\squared_error.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\beam_fitting\beam_skeleton.h" />
-    <ClInclude Include="src\beam_fitting\squared_error.h" />
+    <ClInclude Include="src\beam_skeleton.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\file_load.h" />
     <ClInclude Include="src\imgui_utils.h" />
@@ -391,6 +390,7 @@
     <ClInclude Include="..\..\Downloads\of_v0.9.8_vs_release\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab\stabilizer.hpp" />
     <ClInclude Include="..\..\Downloads\of_v0.9.8_vs_release\of_v0.9.8_vs_release\addons\ofxOpenCv\libs\opencv\include\opencv2\videostab\videostab.hpp" />
     <ClInclude Include="src\point_selector.h" />
+    <ClInclude Include="src\squared_error.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

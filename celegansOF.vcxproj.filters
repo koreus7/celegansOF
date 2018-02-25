@@ -76,10 +76,10 @@
     <ClCompile Include="src\imgui_utils.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\beam_fitting\squared_error.cpp">
+    <ClCompile Include="src\beam_skeleton.cpp">
       <Filter>src\beam_fitting</Filter>
     </ClCompile>
-    <ClCompile Include="src\beam_fitting\beam_skeleton.cpp">
+    <ClCompile Include="src\squared_error.cpp">
       <Filter>src\beam_fitting</Filter>
     </ClCompile>
   </ItemGroup>
@@ -791,10 +791,10 @@
     <ClInclude Include="src\imgui_utils.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\beam_fitting\squared_error.h">
+    <ClInclude Include="src\beam_skeleton.h">
       <Filter>src\beam_fitting</Filter>
     </ClInclude>
-    <ClInclude Include="src\beam_fitting\beam_skeleton.h">
+    <ClInclude Include="src\squared_error.h">
       <Filter>src\beam_fitting</Filter>
     </ClInclude>
   </ItemGroup>
