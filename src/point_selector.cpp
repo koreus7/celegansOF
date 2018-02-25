@@ -55,7 +55,7 @@ void PointSelector::mouseReleased(ofMouseEventArgs & mouse)
 {
 	ofLogVerbose(__FUNCTION__) << "MOUSE RELEASED";
 
-	if (active) 
+	if (active && !ImGui::IsMouseHoveringAnyWindow())
 	{
 		float deltaX = fabs(mouse.x - pressPosition.x);
 		float deltaY = fabs(mouse.y - pressPosition.y);

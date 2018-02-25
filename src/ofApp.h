@@ -34,7 +34,7 @@ class ofApp : public ofBaseApp{
 		int beamWidth;
 		int beamLength;
 		
-		float micronToPixelRatio = 1.0f;
+		float micronToPixelRatio = 0.65f;
 
 		const int CELEGANS_LENGTH_MICRONS = 600;
 
@@ -53,7 +53,7 @@ class ofApp : public ofBaseApp{
 		BeamSkeleton beamSkelton;
 
 		ofImage* focusedImage;
-
+		ofVec2f focusedImagePos;
 
 		const static int PREVIEW_SIZE = 128;
 };

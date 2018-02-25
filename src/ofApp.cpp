@@ -50,10 +50,10 @@ void ofApp::draw() {
 		
 		ofSetColor(255, 255, 255);
 		
-		float x = (ofGetWidth() - focusedImage->getWidth())*0.5f;
-		float y = (ofGetHeight() - focusedImage->getHeight())*0.5f;
-		focusedImage->draw(x, y);
-		beamSkelton.draw(x, y);
+		focusedImagePos.x = (ofGetWidth() - focusedImage->getWidth())*0.5f;
+		focusedImagePos.y = (ofGetHeight() - focusedImage->getHeight())*0.5f;
+		focusedImage->draw(focusedImagePos);
+		beamSkelton.draw(focusedImagePos.x, focusedImagePos.y);
 		tailSelector.draw();
 
 	}
@@ -113,7 +113,7 @@ void ofApp::draw() {
 		ImGui::DragFloat("Micron to Pixel Ratio", &micronToPixelRatio, 1.0f, 0.0001f, 100.0f, "%.5f");
 		if (ImGui::Button("Run Fit", ImVec2(100, 20)))
 		{
-			beamSkelton.fitImage(*focusedImage, tailSelector.pos);
+			beamSkelton.fitImage(*focusedImage, tailSelector.pos - focusedImagePos);
 		}
 
 		ImGui::End();

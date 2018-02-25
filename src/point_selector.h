@@ -18,9 +18,6 @@ public:
 	void mouseReleased(ofMouseEventArgs & mouse);
 	void injectGUI();
 
-	//TODO REMOVE
-	bool clicked;
-
 private:
 	const int CROSS_SIZE = 8;
 	const int MAX_SQUARE_DELTA = 3;

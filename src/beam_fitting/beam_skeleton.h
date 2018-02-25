@@ -38,6 +38,8 @@ private:
 	// The skeleton in image space.
 	ofPolyline polyLine;
 
-	const int FINE_MESH_SCALE = 3;
+	ofVec2f workingPoint;
+
+	const int FINE_MESH_SCALE = 2;
 };
 
