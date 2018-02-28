@@ -49,7 +49,7 @@ void ofApp::draw() {
 
 	}
     
-    beamSkeleton.drawBeamPreview(10, 10);
+    beamSkeleton.drawBeamPreview();
 
 	gui.begin();
 

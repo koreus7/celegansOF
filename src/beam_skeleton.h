@@ -15,7 +15,7 @@ public:
     void setup(AppState* appConfig);
     void update();
     void draw(float x, float y);
-    void drawBeamPreview(float x, float y);
+    void drawBeamPreview();
 	void injectGUI();
 	ofFbo debugFBO;
 	float angleStep = 0.2;

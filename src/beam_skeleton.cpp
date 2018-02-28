@@ -12,16 +12,25 @@ void BeamSkeleton::setup(AppState* appState)
     this->appState = appState;
     
     testimg = ofImage("of.png");
-    
+
     totalLengthMicrons = CELEGANS_LENGTH_MICRONS;
     
     beamShader.load("shadersGL3/beam");
     beamWidth = 30;
     beamLength = 20;
-    
+
+
     debugFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
-    
-    beamPreviewFBO.allocate(MAX_BEAM_SIZE, MAX_BEAM_SIZE, GL_RGBA);
+
+	ofFbo::Settings fboSettings;
+	fboSettings.width = MAX_BEAM_SIZE;
+	fboSettings.height = MAX_BEAM_SIZE;
+	fboSettings.internalformat = GL_RGBA;
+
+	// This is vital for the texture ID to be recognised by ImGui.
+	fboSettings.textureTarget = GL_TEXTURE_2D;
+
+    beamPreviewFBO.allocate(fboSettings);
     beamPreviewTexture = beamPreviewFBO.getTexture();
 }
 
@@ -219,28 +228,21 @@ void BeamSkeleton::update()
     }
 }
 
-void BeamSkeleton::drawBeamPreview(float x, float y)
+void BeamSkeleton::drawBeamPreview()
 {
     beamPreviewFBO.begin();
     beamShader.begin();
     beamShader.setUniform1f("beamWidth", beamWidth);
     beamShader.setUniform1f("beamLength", beamLength);
-    ofDrawRectangle(0, 0, 256, 256);
+    ofDrawRectangle(0, 0, MAX_BEAM_SIZE, MAX_BEAM_SIZE);
     beamShader.end();
     beamPreviewFBO.end();
-    
-    ofSetColor(255, 255, 255);
-    beamPreviewTexture.draw(x, y);
-    //testimg.draw(0,0);
 }
 
 void BeamSkeleton::injectGUI()
 {
     ImGui::Begin("Beam Fit");
-    //ImGui::SliderInt("Tex ID", );
-    //ImGui::SliderInt("Tex ID", &texID, 0, 100);
-    //ofxImGui::AddImage(testimg.getTexture(),ofVec2f(512,512));
-    //ImGui::Image((void*)(unsigned int)texID, ImVec2(512,512));
+    ImGui::Image((void*)(unsigned int)beamPreviewFBO.getTexture().texData.textureID, ImVec2(MAX_BEAM_SIZE,MAX_BEAM_SIZE));
     ImGui::PushItemWidth(120.0f);
     ImGui::SliderFloat("Beam Width", &beamWidth, 1, MAX_BEAM_SIZE);
     ImGui::SliderFloat("Beam Length", &beamLength, 1, MAX_BEAM_SIZE);
