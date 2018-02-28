@@ -9,11 +9,10 @@ out vec4 outputColor;
 
 uniform float beamWidth;
 uniform float beamLength;
+uniform float size;
 
 void main()
 {
-
-	float size = 256.0;
 
 	vec2 centeredPos = gl_FragCoord.xy - size/2;
 

@@ -31,7 +31,6 @@ void BeamSkeleton::setup(AppState* appState)
 	fboSettings.textureTarget = GL_TEXTURE_2D;
 
     beamPreviewFBO.allocate(fboSettings);
-    beamPreviewTexture = beamPreviewFBO.getTexture();
 }
 
 const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
@@ -234,6 +233,7 @@ void BeamSkeleton::drawBeamPreview()
     beamShader.begin();
     beamShader.setUniform1f("beamWidth", beamWidth);
     beamShader.setUniform1f("beamLength", beamLength);
+    beamShader.setUniform1f("size", MAX_BEAM_SIZE);
     ofDrawRectangle(0, 0, MAX_BEAM_SIZE, MAX_BEAM_SIZE);
     beamShader.end();
     beamPreviewFBO.end();

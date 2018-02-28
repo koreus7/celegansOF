@@ -48,10 +48,9 @@ private:
 	ofVec2f workingPoint;
 
 	static const int FINE_MESH_SCALE = 2;
-    static const int MAX_BEAM_SIZE = 256;
+    static const int MAX_BEAM_SIZE = 128;
     
     ofShader beamShader;
-    ofTexture beamPreviewTexture;
     ofFbo beamPreviewFBO;
     
     
