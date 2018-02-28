@@ -16,6 +16,7 @@ ofImage loadFromPath(string path) {
 	else {
 
 		ofLogError("Image must be of format JPG or PNG");
+		return ofImage();
 
 	}
 

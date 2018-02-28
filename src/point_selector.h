@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ofMain.h";
-#include "ofxImGui.h";
+#include "ofMain.h"
+#include "ofxImGui.h"
 
 class PointSelector
 {

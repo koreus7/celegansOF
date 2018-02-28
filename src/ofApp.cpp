@@ -9,8 +9,6 @@ bool themeSet = false;
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-
-	beamShader.load("shadersGL3/beam");
 	
 	ofSetLogLevel(OF_LOG_VERBOSE);
 
@@ -20,16 +18,12 @@ void ofApp::setup()
 	ImGui::GetIO().MouseDrawCursor = false;
 
 	backgroundColor = ofColor(114, 144, 154);
-	beamWidth = 30;
-	beamLength = 20;
-
-	beamPreviewFBO = ofFbo();
-	beamPreviewFBO.allocate(MAX_BEAM_SIZE, MAX_BEAM_SIZE, GL_RGBA);
-	beamPreviewTexture = beamPreviewFBO.getTexture();
 
 	tailSelector.setup();
-
-
+    beamSkeleton.setup(&state);
+    
+    state.selectedTailPos = &tailSelector.pos;
+    
 }
 
 //--------------------------------------------------------------
@@ -43,24 +37,24 @@ void ofApp::draw() {
 
 	ofSetBackgroundColor(backgroundColor);
 
-	ofSetColor(255, 255, 255);
-	beamPreviewTexture.draw(10, 10);
-
-	if (focusedImage) {
+	if (state.focusedImage) {
 		
 		ofSetColor(255, 255, 255);
 		
-		focusedImagePos.x = (ofGetWidth() - focusedImage->getWidth())*0.5f;
-		focusedImagePos.y = (ofGetHeight() - focusedImage->getHeight())*0.5f;
-		focusedImage->draw(focusedImagePos);
-		beamSkelton.draw(focusedImagePos.x, focusedImagePos.y);
+		state.focusedImagePos.x = (ofGetWidth() - state.focusedImage->getWidth())*0.5f;
+		state.focusedImagePos.y = (ofGetHeight() - state.focusedImage->getHeight())*0.5f;
+		state.focusedImage->draw(state.focusedImagePos);
+		beamSkeleton.draw(state.focusedImagePos.x, state.focusedImagePos.y);
 		tailSelector.draw();
 
 	}
+    
+    beamSkeleton.drawBeamPreview(10, 10);
 
 	gui.begin();
 
 	tailSelector.injectGUI();
+    beamSkeleton.injectGUI();
 
 	if (!themeSet) {
 		setupTheme(ImGui::GetStyle());
@@ -69,6 +63,7 @@ void ofApp::draw() {
 
 	{
 		ImGui::Text("Worm Beam");
+        ImGui::DragFloat("\u03BCm per pixel", &state.micronToPixelRatio, 1.0f, 0.0001f, 100.0f, "%.5f");
 		//this will change the app background color
 		//ImGui::ColorEdit3("Background Color", (float*)&backgroundColor);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
@@ -97,49 +92,17 @@ void ofApp::draw() {
 
 			if (ImGui::ImageButton((ImTextureID)(uintptr_t)previewImageIds[i], ImVec2(PREVIEW_SIZE, PREVIEW_SIZE))) {
 
-				focusedImage = &previewImages[i];
+				state.focusedImage = &previewImages[i];
 			}
 
 		}
 
 	}
-
-	{
-
-		ImGui::SetNextWindowSize(ofVec2f(512, 512), ImGuiSetCond_FirstUseEver);
-		ImGui::Begin("Beam Fit");
-		ImGui::SliderInt("Beam Width", &beamWidth, 1, MAX_BEAM_SIZE);
-		ImGui::SliderInt("Beam Length", &beamLength, 1, MAX_BEAM_SIZE);
-		ImGui::DragFloat("Micron to Pixel Ratio", &micronToPixelRatio, 1.0f, 0.0001f, 100.0f, "%.5f");
-		if (ImGui::Button("Run Fit", ImVec2(100, 20)))
-		{
-			beamSkelton.fitImage(*focusedImage, tailSelector.pos - focusedImagePos);
-		}
-
-		ImGui::End();
-	
-	}
-
-
-	if (!beamSkelton.isFitDone())
-	{
-		beamSkelton.step();
-	}
-
-
-
+    
 	gui.end();
-
-
-	beamPreviewFBO.begin();
-	beamShader.begin();
-	beamShader.setUniform1f("beamWidth", beamWidth);
-	beamShader.setUniform1f("beamLength", beamLength);
-	ofDrawRectangle(0, 0, 256, 256);
-	beamShader.end();
-	beamPreviewFBO.end();
-
-	beamSkelton.configureBeamSize(beamWidth, beamLength, micronToPixelRatio*CELEGANS_LENGTH_MICRONS);
+    
+    beamSkeleton.update();
+    
 }
 
 //--------------------------------------------------------------

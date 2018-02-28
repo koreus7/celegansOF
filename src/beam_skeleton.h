@@ -1,18 +1,21 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxImGui.h"
+#include "app_state.h"
+#include "constants.h"
+#include <string>
 
 class BeamSkeleton
 {
 public:
-	BeamSkeleton();
 	~BeamSkeleton();
 	void fitImage(const ofImage& image, ofVec2f tailPoint);
 	bool isFitDone();
 	void step();
-	// Configure the beam size relative to the image.
-	void configureBeamSize(float beamWidth, float beamLength, float totalLength);
-	void draw(float x, float y);
+    void setup(AppState* appConfig);
+    void update();
+    void draw(float x, float y);
+    void drawBeamPreview(float x, float y);
 	void injectGUI();
 	ofFbo debugFBO;
 	float angleStep = 0.2;
@@ -22,12 +25,16 @@ private:
 	const float getBeamPixel(float beamY);
 
 	ofImage* scaledImage;
+    
+    bool showProgress = true;
 
 	// Beam width in fine mesh space.
 	float beamWidth = 30.0f;
 	// Beam length in fine mesh space.
 	float beamLength = 60.0f;
-	// Total Length in fine mesh space.
+	
+    float totalLengthMicrons = 600.0f;
+    // Total Length in fine mesh space.
 	float totalLength = 600.0f;
 
 	float lastAngle = 0.0f;
@@ -40,6 +47,18 @@ private:
 
 	ofVec2f workingPoint;
 
-	const int FINE_MESH_SCALE = 2;
+	static const int FINE_MESH_SCALE = 2;
+    static const int MAX_BEAM_SIZE = 256;
+    
+    ofShader beamShader;
+    ofTexture beamPreviewTexture;
+    ofFbo beamPreviewFBO;
+    
+    
+    AppState* appState;
+    
+    //TODO remove this
+    ofImage testimg;
+    int texID;
 };
 

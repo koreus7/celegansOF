@@ -1,0 +1,1454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="openframeworks"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\addons\;CMake Files\..\..\..\addons\ofxCMake\;CMake Files\..\..\..\addons\ofxCMake\modules\;CMake Files\..\..\..\addons\ofxCMake\addOns\;CMake Files\..\..\..\addons\ofxCMake\addOns\internal\;CMake Files\..\..\..\addons\ofxCMake\addOns\external\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="core">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/CMakeFiles/core.dir/core.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 core"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="core/fast">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/CMakeFiles/core.dir/core.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 core/fast"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxJSON">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxCMake/libs/libofxJSON.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxJSON"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxJSON/fast">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxCMake/libs/libofxJSON.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxJSON/fast"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxOpenCv">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxCMake/libs/libofxOpenCv.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxOpenCv"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxOpenCv/fast">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxCMake/libs/libofxOpenCv.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxOpenCv/fast"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="of_static">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxCMake/libs/libopenFrameworksStatic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 of_static"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="of_static/fast">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxCMake/libs/libopenFrameworksStatic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 of_static/fast"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofApp">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/bin/ofApp.app/Contents/MacOS/ofApp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofApp"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofApp/fast">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/bin/ofApp.app/Contents/MacOS/ofApp" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="0"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofApp/fast"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="of_shared">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/bin/ofApp.app/Contents/Frameworks/libopenFrameworksShared.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 of_shared"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="of_shared/fast">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/bin/ofApp.app/Contents/Frameworks/libopenFrameworksShared.dylib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 of_shared/fast"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxImGui">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxCMake/libs/libofxImGui.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxImGui"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ofxImGui/fast">
+				<Option output="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxCMake/libs/libofxImGui.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/include/json"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/poco/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/freetype/include/freetype2"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/fmodex/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/FreeImage/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/tess2/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glfw/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/utf8cpp/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/glew/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/openssl/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/cairo/include/cairo"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/rtAudio/include"/>
+					<Add directory="/Users/user/DEV/of_v0.9.8_osx_release/libs/boost/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 ofxImGui/fast"/>
+					<CompileFile command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/opt/local/bin/gmake -j4 -f &quot;/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src/imgui.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src/imgui.h">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src/imgui_demo.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/libs/imgui/src/imgui_draw.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/BaseEngine.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/BaseEngine.h">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/BaseTheme.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/BaseTheme.h">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/EngineGLFW.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/EngineGLFW.h">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/EngineOpenGLES.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/EngineOpenGLES.h">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/Gui.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/Gui.h">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/Helpers.cpp">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxImGui/src/Helpers.h">
+			<Option target="ofxImGui"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/libs/jsoncpp/src/jsoncpp.cpp">
+			<Option target="ofxJSON"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src/ofxJSONElement.cpp">
+			<Option target="ofxJSON"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxJSON/src/ofxJSONElement.h">
+			<Option target="ofxJSON"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvColorImage.cpp">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvColorImage.h">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvContourFinder.cpp">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvContourFinder.h">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvFloatImage.cpp">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvFloatImage.h">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvGrayscaleImage.cpp">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvGrayscaleImage.h">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.cpp">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.h">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvImage.cpp">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvImage.h">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvShortImage.cpp">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvShortImage.h">
+			<Option target="ofxOpenCv"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/app_state.cpp">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/app_state.h">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/beam_skeleton.cpp">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/beam_skeleton.h">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/constants.h">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/file_load.cpp">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/file_load.h">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/imgui_utils.cpp">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/imgui_utils.h">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/main.cpp">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/ofApp.cpp">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/ofApp.h">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/point_selector.cpp">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/point_selector.h">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/squared_error.cpp">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/src/squared_error.h">
+			<Option target="ofApp"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/of3dPrimitives.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/of3dPrimitives.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/of3dUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/of3dUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofCamera.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofCamera.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofMesh.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofMesh.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofNode.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofNode.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofAppGLFWWindow.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofAppGLFWWindow.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofAppGlutWindow.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofAppGlutWindow.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofAppNoWindow.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofAppNoWindow.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofAppRunner.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofAppRunner.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofMainLoop.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/app/ofMainLoop.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication/ofArduino.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication/ofArduino.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication/ofSerial.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/communication/ofSerial.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events/ofEvents.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/events/ofEvents.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofBufferObject.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofBufferObject.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofFbo.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofFbo.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofGLProgrammableRenderer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofGLProgrammableRenderer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofGLRenderer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofGLRenderer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofGLUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofGLUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofLight.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofLight.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofMaterial.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofMaterial.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofShader.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofShader.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofTexture.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofTexture.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofVbo.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofVbo.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofVboMesh.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/gl/ofVboMesh.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/of3dGraphics.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/of3dGraphics.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofBitmapFont.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofBitmapFont.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofCairoRenderer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofCairoRenderer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofGraphics.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofGraphics.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofImage.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofImage.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofPath.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofPath.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofPixels.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofPixels.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofPolyline.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofPolyline.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofRendererCollection.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofRendererCollection.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofTessellator.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofTessellator.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofTrueTypeFont.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/graphics/ofTrueTypeFont.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofMath.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofMath.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofMatrix3x3.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofMatrix3x3.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofMatrix4x4.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofMatrix4x4.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofQuaternion.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofQuaternion.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofVec2f.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofVec2f.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofVec4f.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/math/ofVec4f.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofBaseSoundStream.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofBaseSoundStream.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofFmodSoundPlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofFmodSoundPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofOpenALSoundPlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofOpenALSoundPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofRtAudioSoundStream.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofRtAudioSoundStream.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofSoundBuffer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofSoundBuffer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofSoundPlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofSoundPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofSoundStream.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/sound/ofSoundStream.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofBaseTypes.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofBaseTypes.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofColor.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofColor.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofParameter.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofParameter.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofParameterGroup.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofParameterGroup.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofRectangle.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/types/ofRectangle.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofFileUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofFileUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofFpsCounter.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofFpsCounter.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofLog.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofLog.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofMatrixStack.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofMatrixStack.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofSystemUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofSystemUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofThread.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofThread.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofTimer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofTimer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofURLFileLoader.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofURLFileLoader.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofXml.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofXml.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationGrabber.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationGrabber.mm">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationPlayer.mm">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationVideoPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationVideoPlayer.m">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQTKitGrabber.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQTKitGrabber.mm">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQTKitMovieRenderer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQTKitMovieRenderer.m">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQTKitPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQTKitPlayer.mm">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQtUtils.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQtUtils.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQuickTimeGrabber.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQuickTimeGrabber.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQuickTimePlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofQuickTimePlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofVideoGrabber.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofVideoGrabber.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofVideoPlayer.cpp">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/libs/openFrameworks/video/ofVideoPlayer.h">
+			<Option target="core"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/modules/main.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/modules/addOns.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/modules/addOnsMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/modules/openFrameworks.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/modules/openFrameworksApple.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/modules/config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/modules/configApple.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\modules\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/addOns/internal/ofxOpenCv.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\addOns\internal\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/addOns/external/ofxJSON.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\addOns\external\"/>
+		</Unit>
+		<Unit filename="/Users/user/DEV/of_v0.9.8_osx_release/apps/myApps/celegansOF/../../../addons/ofxCMake/addOns/external/ofxImGui.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\addons\ofxCMake\addOns\external\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
