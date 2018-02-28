@@ -63,7 +63,6 @@ void ofApp::draw() {
 
 	{
 		ImGui::Text("Worm Beam");
-        ImGui::DragFloat("\u03BCm per pixel", &state.micronToPixelRatio, 1.0f, 0.0001f, 100.0f, "%.5f");
 		//this will change the app background color
 		//ImGui::ColorEdit3("Background Color", (float*)&backgroundColor);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);

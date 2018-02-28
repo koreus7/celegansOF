@@ -12,8 +12,6 @@ void BeamSkeleton::setup(AppState* appState)
     this->appState = appState;
     
     testimg = ofImage("of.png");
-
-    totalLengthMicrons = CELEGANS_LENGTH_MICRONS;
     
     beamShader.load("shadersGL3/beam");
     beamWidth = 30;
@@ -103,7 +101,6 @@ const float BeamSkeleton::getBeamPixel(float beamY)
 void BeamSkeleton::fitImage(const ofImage& image, ofVec2f tailPoint)
 {
 
-    totalLength = totalLengthMicrons * appState->micronToPixelRatio;
 	debugFBO.begin();
 	ofSetColor(255, 255, 0);
 	ofDrawRectangle(tailPoint.x, tailPoint.y, 1, 1);
