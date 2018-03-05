@@ -14,9 +14,6 @@ void BeamSkeleton::setup(AppState* appState)
     testimg = ofImage("of.png");
     
     beamShader.load("shadersGL3/beam");
-    beamWidth = 30;
-    beamLength = 20;
-
 
     debugFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
 
@@ -34,8 +31,8 @@ void BeamSkeleton::setup(AppState* appState)
 const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
 {
 
-	const int BEAM_RES_X = floor(beamLength);
-	const int BEAM_RES_Y = floor(beamWidth);
+	const int BEAM_RES_X = floor(parameters.beamLength);
+	const int BEAM_RES_Y = floor(parameters.beamWidth);
 
 	const int imageWidth = scaledImage->getWidth();
 	const int imageHeight = scaledImage->getHeight();
@@ -63,7 +60,7 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
 				{
 					debugFBO.begin();
 					ofSetColor(255, 0, 0);
-					ofDrawRectangle(imageX/FINE_MESH_SCALE, imageY/FINE_MESH_SCALE, 1, 1);
+					ofDrawRectangle(imageX/parameters.fineMeshScale, imageY/parameters.fineMeshScale, 1, 1);
 					debugFBO.end();
 				}
 				//ofLogVerbose(__FUNCTION__) << "Pixel out of range for error calc " << imageX << " " << imageY;
@@ -95,7 +92,7 @@ const float BeamSkeleton::getBeamPixel(float beamY)
 	////Convert into local frame.
 	//float r = fabs(tan(beamAngle)*(testPoint.x - beamstart.x) + beamstart.y - testPoint.y) / sqrt(1 + tan(beamAngle)*tan(beamAngle));
 	
-	return 1.0f - 0.5f * (1 + cos((PI*beamY) / (beamWidth*0.5f)));
+	return 1.0f - 0.5f * (1 + cos((PI*beamY) / (parameters.beamWidth*0.5f)));
 }
 
 void BeamSkeleton::fitImage(const ofImage& image, ofVec2f tailPoint)
@@ -114,10 +111,10 @@ void BeamSkeleton::fitImage(const ofImage& image, ofVec2f tailPoint)
 	}
 
 	scaledImage = new ofImage(image);
-	scaledImage->resize(image.getWidth()*FINE_MESH_SCALE, image.getHeight()*FINE_MESH_SCALE);
+	scaledImage->resize(image.getWidth()*parameters.fineMeshScale, image.getHeight()*parameters.fineMeshScale);
 
 
-	totalSteps = floor(totalLength / (0.5*beamLength));
+	totalSteps = floor(parameters.totalLength / (0.5*parameters.beamLength));
 	stepCount = 0;
 
 	if (totalSteps == 0) 
@@ -129,7 +126,7 @@ void BeamSkeleton::fitImage(const ofImage& image, ofVec2f tailPoint)
 	polyLine.clear();
 	polyLine.addVertex(ofVec2f(tailPoint));
 
-	workingPoint = tailPoint * FINE_MESH_SCALE;
+	workingPoint = tailPoint * parameters.fineMeshScale;
 
 	debugFBO.begin();
 	ofSetColor(0, 255, 0);
@@ -151,7 +148,7 @@ void BeamSkeleton::step()
 
 	debugFBO.begin();
 	ofSetColor(0, 0, 255);
-	ofDrawRectangle(workingPoint.x/FINE_MESH_SCALE, workingPoint.y/FINE_MESH_SCALE, 1, 1);
+	ofDrawRectangle(workingPoint.x/parameters.fineMeshScale, workingPoint.y/parameters.fineMeshScale, 1, 1);
 	debugFBO.end();
 
 	for (int j = 0; j < angleSteps; j++)
@@ -179,9 +176,9 @@ void BeamSkeleton::step()
 
 	}
 
-	workingPoint.x = workingPoint.x + 0.5*beamLength * cos(nextAngle);
-	workingPoint.y = workingPoint.y - 0.5*beamLength * sin(nextAngle);
-	polyLine.addVertex(workingPoint / FINE_MESH_SCALE);
+	workingPoint.x = workingPoint.x + 0.5*parameters.beamLength * cos(nextAngle);
+	workingPoint.y = workingPoint.y - 0.5*parameters.beamLength * sin(nextAngle);
+	polyLine.addVertex(workingPoint / parameters.fineMeshScale);
 
 	lastAngle = nextAngle;
 
@@ -228,8 +225,8 @@ void BeamSkeleton::drawBeamPreview()
 {
     beamPreviewFBO.begin();
     beamShader.begin();
-    beamShader.setUniform1f("beamWidth", beamWidth);
-    beamShader.setUniform1f("beamLength", beamLength);
+    beamShader.setUniform1f("beamWidth", parameters.beamWidth);
+    beamShader.setUniform1f("beamLength", parameters.beamLength);
     beamShader.setUniform1f("size", MAX_BEAM_SIZE);
     ofDrawRectangle(0, 0, MAX_BEAM_SIZE, MAX_BEAM_SIZE);
     beamShader.end();
@@ -241,14 +238,20 @@ void BeamSkeleton::injectGUI()
     ImGui::Begin("Beam Fit");
     ImGui::Image((void*)(unsigned int)beamPreviewFBO.getTexture().texData.textureID, ImVec2(MAX_BEAM_SIZE,MAX_BEAM_SIZE));
     ImGui::PushItemWidth(120.0f);
-    ImGui::SliderFloat("Beam Width", &beamWidth, 1, MAX_BEAM_SIZE);
-    ImGui::SliderFloat("Beam Length", &beamLength, 1, MAX_BEAM_SIZE);
-    ImGui::DragFloat("Total Length", &totalLength, 1.0f, 1.0f,1000.0f,"%.3f");
+    ImGui::SliderFloat("Beam Width", &parameters.beamWidth, 1, MAX_BEAM_SIZE);
+    ImGui::SliderFloat("Beam Length", &parameters.beamLength, 1, MAX_BEAM_SIZE);
+    ImGui::DragFloat("Total Length", &parameters.totalLength, 1.0f, 1.0f,1000.0f,"%.3f");
     ImGui::PopItemWidth();
     ImGui::Checkbox("Show Progress", &showProgress);
     if (ImGui::Button("Run Fit", ImVec2(100, 20)))
     {
         fitImage(*appState->focusedImage, *(appState->selectedTailPos) - appState->focusedImagePos);
+    }
+
+    if(ImGui::Button("Save", ImVec2(100,20)))
+    {
+        ofLogVerbose(__FUNCTION__) << this->parameters.serializeToJSONString();
+        this->parameters.serializeToFile("test.json");
     }
     
     ImGui::End();

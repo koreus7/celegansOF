@@ -4,6 +4,7 @@
 #include "app_state.h"
 #include "constants.h"
 #include <string>
+#include "beam_parameters.h"
 
 class BeamSkeleton
 {
@@ -19,6 +20,7 @@ public:
 	void injectGUI();
 	ofFbo debugFBO;
 	float angleStep = 0.2;
+    BeamParameters parameters;
 
 private:
 	const float getSquaredError(ofVec2f beamStart, float angle);
@@ -28,17 +30,7 @@ private:
     
     bool showProgress = true;
 
-	// Beam width in fine mesh space.
-	float beamWidth = 30.0f;
-	// Beam length in fine mesh space.
-	float beamLength = 60.0f;
-	
-    float totalLengthMicrons = 600.0f;
-    // Total Length in fine mesh space.
-	float totalLength = 600.0f;
-
 	float lastAngle = 0.0f;
-
 	int stepCount = 0;
 	int totalSteps = 0;
 
@@ -47,7 +39,7 @@ private:
 
 	ofVec2f workingPoint;
 
-	static const int FINE_MESH_SCALE = 3;
+	static const int fineMeshScale = 3;
     static const int MAX_BEAM_SIZE = 128;
     
     ofShader beamShader;

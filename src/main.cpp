@@ -1,11 +1,25 @@
 #include "ofMain.h"
 #include "ofApp.h"
 
+#ifdef RUN_TESTS
+#define CATCH_CONFIG_RUNNER
+#include "catch.h"
+#include "../tests/serializable_test.h"
+#endif
+
 //========================================================================
-int main( ){
+int main(int argc, char* argv[]) {
 
 
-	ofGLWindowSettings settings;
+#ifdef RUN_TESTS
+
+    std::cout<< "Running Catch Tests" << std::endl;
+    int result = Catch::Session().run( argc, argv );
+
+#endif
+
+
+    ofGLWindowSettings settings;
 
 	settings.width = 1024;
 	settings.height = 768;
