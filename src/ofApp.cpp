@@ -25,7 +25,29 @@ void ofApp::setup()
     beamSkeleton.setup(&state);
     
     state.selectedTailPos = &tailSelector.pos;
-    
+
+
+    // TODO Free this memory
+    // The image looks like the background so it doesn't show but its
+    // not going to cause null pointer errors.
+    ofSetColor(backgroundColor);
+    state.focusedImage = new ofImage();
+    state.focusedImage->allocate(128,128, OF_IMAGE_COLOR);
+    state.focusedImage->clear();
+
+
+    experimentData.registerObject(beamSkeleton.parameters);
+    experimentData.registerObject(experimentMetaData);
+    experimentData.registerObject(tailSelector);
+    experimentData.registerImage(&state.focusedImage, "focused_image");
+
+//    if(ofFile::doesFileExist("config.json"))
+//	{
+//		config.deserializeFromFile("config.json");
+//	}
+//
+
+
 }
 
 //--------------------------------------------------------------
@@ -68,12 +90,12 @@ void ofApp::draw() {
 		//this will change the app background color
 		//ImGui::ColorEdit3("Background Color", (float*)&backgroundColor);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		if (ImGui::Button("Load", ImVec2(100, 20))) {
+		if (ImGui::Button("Load", ImVec2(120, 20))) {
 
 			ofFileDialogResult openFileResult = ofSystemLoadDialog("Select a jpg or png worm image.");
 			
-			if (openFileResult.bSuccess) {
-
+			if (openFileResult.bSuccess)
+            {
 				string path = openFileResult.getPath();
 				ofImage image = loadFromPath(path);
 				ofImage previewImage = image;
@@ -84,10 +106,46 @@ void ofApp::draw() {
 				previewPaths[previewCount] = path;
 
 				previewCount = (previewCount + 1) % NUMBER_PREVIEW_IMAGES;
-
 			}
 
 		}
+
+        if(ImGui::Button("Log Experiment", ImVec2(120,20)))
+        {
+            showLogWindow = true;
+        }
+
+        if(ImGui::Button("Load Experiment", ImVec2(120,20)))
+        {
+            ofFileDialogResult openFileResult = ofSystemLoadDialog("Select Experiment JSON file");
+
+            if (openFileResult.bSuccess)
+            {
+                string path = openFileResult.getPath();
+                experimentData.deserializeFromFile(path);
+                beamSkeleton.fitImage(*state.focusedImage, *(state.selectedTailPos) - state.focusedImagePos);
+            }
+        }
+
+        if(showLogWindow) {
+
+            ImGui::Begin("Log Experiment", &showLogWindow);
+            ImGui::InputTextMultiline("Comments", experimentMetaData.commentsBuffer, experimentMetaData.COMMENTS_BUFFER_SIZE);
+            if(ImGui::Button("Commit", ImVec2(100,20)))
+            {
+                auto now = std::chrono::system_clock::now();
+                const std::time_t nowTime = std::chrono::system_clock::to_time_t(now);
+                struct tm * t = localtime( &nowTime );
+                char* buffer = new char[64];
+                strftime(buffer, 64, "%Y-%m-%d-%H-%M-%S", t);
+                std::string formatedTime = std::string(buffer);
+                experimentData.serializeAll("experiment-data/experiment" + formatedTime + ".json");
+                showLogWindow = false;
+            }
+            ImGui::End();
+
+        }
+
 
 		for (int i = 0; i < previewCount; i++) {
 
@@ -96,7 +154,7 @@ void ofApp::draw() {
 				state.focusedImage = &previewImages[i];
 			}
 
-		}
+        }
 
 	}
     
@@ -159,4 +217,9 @@ void ofApp::gotMessage(ofMessage msg) {
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo) {
 
+}
+
+void ofApp::exit()
+{
+    ofBaseApp::exit();
 }

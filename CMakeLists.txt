@@ -42,6 +42,7 @@ set( ${APP_NAME}_SOURCE_FILES
         src/squared_error.cpp
         src/file_load.cpp
         src/constants.h
+        src/experiment_metadata.cpp
         ${TEST_FILES}
                 )
 

@@ -15,6 +15,7 @@ int main(int argc, char* argv[]) {
 
     std::cout<< "Running Catch Tests" << std::endl;
     int result = Catch::Session().run( argc, argv );
+	return result;
 
 #endif
 

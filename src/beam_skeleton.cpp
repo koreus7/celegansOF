@@ -11,8 +11,6 @@ void BeamSkeleton::setup(AppState* appState)
 {
     this->appState = appState;
     
-    testimg = ofImage("of.png");
-    
     beamShader.load("shadersGL3/beam");
 
     debugFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
@@ -247,13 +245,6 @@ void BeamSkeleton::injectGUI()
     {
         fitImage(*appState->focusedImage, *(appState->selectedTailPos) - appState->focusedImagePos);
     }
-
-    if(ImGui::Button("Save", ImVec2(100,20)))
-    {
-        ofLogVerbose(__FUNCTION__) << this->parameters.serializeToJSONString();
-        this->parameters.serializeToFile("test.json");
-    }
-    
     ImGui::End();
     
 }

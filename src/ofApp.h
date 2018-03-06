@@ -5,7 +5,9 @@
 #include "point_selector.h"
 #include "beam_skeleton.h"
 #include "app_state.h"
+#include "serializable_library.h"
 #include <string.h>
+#include "experiment_metadata.h"
 
 
 class ofApp : public ofBaseApp{
@@ -15,16 +17,17 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
+		void keyPressed(int key) final;
+		void keyReleased(int key) override;
+		void mouseMoved(int x, int y ) override;
+		void mouseDragged(int x, int y, int button) override;
+		void mousePressed(int x, int y, int button) override;
+		void mouseReleased(int x, int y, int button) override;
 		void mouseScrolled(float x, float y);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
+		void windowResized(int w, int h) override;
+		void dragEvent(ofDragInfo dragInfo) override;
 		void gotMessage(ofMessage msg);
+        void exit() override;
 
 		ofxImGui::Gui gui;
 		
@@ -42,7 +45,12 @@ class ofApp : public ofBaseApp{
 		BeamSkeleton beamSkeleton;
 
         AppState state;
-		
+
+		SerializableLibrary experimentData;
+
+        ExperimentMetadata experimentMetaData;
+
+        bool showLogWindow = false;
 
 		const static int PREVIEW_SIZE = 128;
 };

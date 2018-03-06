@@ -86,3 +86,20 @@ void PointSelector::injectGUI()
 	ImGui::End();
 
 }
+
+void PointSelector::serialize(ofxJSONElement &root) const
+{
+	root["x"] = pos.x;
+	root["y"] = pos.y;
+}
+
+void PointSelector::deserialize(const ofxJSONElement &root)
+{
+	pos.x = root.get("x", Json::Value(0.0f)).asFloat();
+	pos.y = root.get("y", Json::Value(0.0f)).asFloat();
+}
+
+int PointSelector::getUniqueId() const
+{
+	return 90;
+}

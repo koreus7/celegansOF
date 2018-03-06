@@ -47,9 +47,6 @@ private:
     
     
     AppState* appState;
-    
-    //TODO remove this
-    ofImage testimg;
-    int texID;
+
 };
 
