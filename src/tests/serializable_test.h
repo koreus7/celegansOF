@@ -26,9 +26,9 @@ public:
         childInt = root["child"]["childInt"].asInt();
     }
 
-    int getUniqueId() const override
+    std::string getUniqueId() const override
     {
-        return 111;
+        return "MockSerializable";
     }
 
 };
@@ -51,9 +51,9 @@ public:
         floatValue = root["floatValue"].asFloat();
     }
 
-    int getUniqueId() const override
+    std::string getUniqueId() const override
     {
-        return 222;
+        return "MockSerializableDifferentId";
     }
 };
 
@@ -141,7 +141,7 @@ TEST_CASE("Serializable library", "[serializable]")
 
         std::string serializedString = library.serializeAllToString();
 
-        REQUIRE( serializedString == "{\n   \"111\" : {\n      \"child\" : {\n         \"childInt\" : 24\n      },\n      \"mockInt\" : 12\n   },\n   \"222\" : {\n      \"floatValue\" : 5.199999809265137,\n      \"intValue\" : 0\n   }\n}\n" );
+        REQUIRE( serializedString == "{\n   \"MockSerializable\" : {\n      \"child\" : {\n         \"childInt\" : 24\n      },\n      \"mockInt\" : 12\n   },\n   \"MockSerializableDifferentId\" : {\n      \"floatValue\" : 5.199999809265137,\n      \"intValue\" : 0\n   }\n}\n" );
 
     }
 

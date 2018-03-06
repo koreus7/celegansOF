@@ -11,9 +11,9 @@ void ExperimentMetadata::deserialize(const ofxJSONElement &root)
     commentsBuffer = strdup(root["comments"].asCString());
 }
 
-int ExperimentMetadata::getUniqueId() const
+std::string ExperimentMetadata::getUniqueId() const
 {
-    return 3;
+    return "ExperimentMetadata";
 }
 
 ExperimentMetadata::ExperimentMetadata()

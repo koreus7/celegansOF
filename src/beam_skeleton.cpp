@@ -248,3 +248,49 @@ void BeamSkeleton::injectGUI()
     ImGui::End();
     
 }
+
+void BeamSkeleton::serialize(ofxJSONElement &root) const
+{
+	Json::Value skeletonObj = Json::Value(Json::arrayValue);
+
+	for(int i = 0; i < polyLine.size(); i++)
+	{
+		ofPoint p = polyLine[i];
+
+		Json::Value pointX = Json::Value(p.x);
+		Json::Value pointY = Json::Value(p.y);
+
+		skeletonObj.append(pointX);
+		skeletonObj.append(pointY);
+
+	}
+
+	root["skeletonPoints"] = skeletonObj;
+}
+
+void BeamSkeleton::deserialize(const ofxJSONElement &root)
+{
+	if(root.isMember("skeletonPoints"))
+	{
+
+		polyLine.clear();
+
+		Json::Value skeletonPoints = root.get("skeletonPoints", Json::Value(Json::arrayValue));
+
+		for(int i = 0; i < skeletonPoints.size() - 1; i+=2)
+		{
+			float x = skeletonPoints[i].asFloat();
+			float y = skeletonPoints[i+1].asFloat();
+
+			polyLine.addVertex(x, y);
+
+		}
+
+	}
+
+}
+
+std::string BeamSkeleton::getUniqueId() const
+{
+	return "BeamSkeleton";
+}

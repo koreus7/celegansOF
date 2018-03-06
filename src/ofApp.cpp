@@ -36,17 +36,11 @@ void ofApp::setup()
     state.focusedImage->clear();
 
 
+    experimentData.registerObject(beamSkeleton);
     experimentData.registerObject(beamSkeleton.parameters);
     experimentData.registerObject(experimentMetaData);
     experimentData.registerObject(tailSelector);
     experimentData.registerImage(&state.focusedImage, "focused_image");
-
-//    if(ofFile::doesFileExist("config.json"))
-//	{
-//		config.deserializeFromFile("config.json");
-//	}
-//
-
 
 }
 
@@ -123,7 +117,6 @@ void ofApp::draw() {
             {
                 string path = openFileResult.getPath();
                 experimentData.deserializeFromFile(path);
-                beamSkeleton.fitImage(*state.focusedImage, *(state.selectedTailPos) - state.focusedImagePos);
             }
         }
 
@@ -139,7 +132,9 @@ void ofApp::draw() {
                 char* buffer = new char[64];
                 strftime(buffer, 64, "%Y-%m-%d-%H-%M-%S", t);
                 std::string formatedTime = std::string(buffer);
-                experimentData.serializeAll("experiment-data/experiment" + formatedTime + ".json");
+                std::string directoryName = "experiment-data/experiment" + formatedTime + "/";
+                ofDirectory::createDirectory(directoryName);
+                experimentData.serializeAll(directoryName, "experiment.json");
                 showLogWindow = false;
             }
             ImGui::End();

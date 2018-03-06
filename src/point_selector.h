@@ -15,7 +15,7 @@ public:
 
 	void serialize(ofxJSONElement &root) const override;
 
-	int getUniqueId() const override;
+	std::string getUniqueId() const override;
 
 	void deserialize(const ofxJSONElement &root) override;
 

@@ -5,8 +5,9 @@
 #include "constants.h"
 #include <string>
 #include "beam_parameters.h"
+#include "serializable.h"
 
-class BeamSkeleton
+class BeamSkeleton : public ISerializable
 {
 public:
 	~BeamSkeleton();
@@ -18,6 +19,13 @@ public:
     void draw(float x, float y);
     void drawBeamPreview();
 	void injectGUI();
+
+	void serialize(ofxJSONElement &root) const override;
+
+	void deserialize(const ofxJSONElement &root) override;
+
+	std::string getUniqueId() const override;
+
 	ofFbo debugFBO;
 	float angleStep = 0.2;
     BeamParameters parameters;

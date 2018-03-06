@@ -19,6 +19,6 @@ public:
     void deserializeFile(const string& fileName);
     void deserializeJSONString(const string& data);
 
-    virtual int getUniqueId() const = 0;
+    virtual std::string getUniqueId() const = 0;
 
 };

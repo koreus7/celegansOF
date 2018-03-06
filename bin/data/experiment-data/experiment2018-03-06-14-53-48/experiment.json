@@ -1,0 +1,2 @@
+{"BeamParameters":{"beamLength":16.57500076293945,"beamWidth":48.92500305175781,"fineMeshScale":2,"totalLength":500},"ExperimentMetadata":{"VERSION":"0.1","comments":"High curvature seems to require a short beam."},"PointSelector":{"x":430,"y":281},"images":{"focused_image":"experiment-data/experiment2018-03-06-14-53-48/focused_image.png"}}
+

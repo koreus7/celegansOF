@@ -99,7 +99,7 @@ void PointSelector::deserialize(const ofxJSONElement &root)
 	pos.y = root.get("y", Json::Value(0.0f)).asFloat();
 }
 
-int PointSelector::getUniqueId() const
+std::string PointSelector::getUniqueId() const
 {
-	return 90;
+	return "PointSelector";
 }

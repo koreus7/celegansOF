@@ -11,7 +11,7 @@ public:
     // Serialize.
     std::string serializeAllToString() const;
     void serializeAll(ofxJSONElement& root) const;
-    void serializeAll(const std::string& fileName) const;
+    void serializeAll(std::string folder, const std::string& name);
 
     // Deserialize.
     void deserializeFromJSONString(const std::string& serialisedString);
@@ -29,6 +29,7 @@ private:
     ISerializable* objects[MAX_OBJECTS];
     ofImage** images[MAX_IMAGES];
     std::string imageNames[MAX_IMAGES];
+    std::string imageDirectory;
     ofxJSONElement deserializedData;
     int objectCount = 0;
     int imageCount = 0;

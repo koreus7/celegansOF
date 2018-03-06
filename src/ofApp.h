@@ -46,8 +46,8 @@ class ofApp : public ofBaseApp{
 
         AppState state;
 
+        ofImage* screenCapture;
 		SerializableLibrary experimentData;
-
         ExperimentMetadata experimentMetaData;
 
         bool showLogWindow = false;

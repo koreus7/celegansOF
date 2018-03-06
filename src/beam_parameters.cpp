@@ -19,7 +19,7 @@ void BeamParameters::deserialize(const ofxJSONElement& root)
 
 }
 
-int BeamParameters::getUniqueId() const
+std::string BeamParameters::getUniqueId() const
 {
-    return 1;
+    return "BeamParameters";
 }

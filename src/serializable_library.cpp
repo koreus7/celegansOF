@@ -8,11 +8,12 @@ void SerializableLibrary::registerObject(ISerializable& object)
     objectCount++;
 }
 
-void SerializableLibrary::serializeAll(const std::string &fileName) const
+void SerializableLibrary::serializeAll(std::string folder, const std::string& name)
 {
     ofxJSONElement root;
+    imageDirectory = folder;
     serializeAll(root);
-    root.save(fileName);
+    root.save(folder + name);
 }
 
 std::string SerializableLibrary::serializeAllToString() const
@@ -28,20 +29,23 @@ void SerializableLibrary::serializeAll(ofxJSONElement& root) const
     {
         ofxJSONElement object;
         objects[i]->serialize(object);
-        std::string stringId = std::to_string(objects[i]->getUniqueId());
-        root[stringId] = object;
+        root[objects[i]->getUniqueId()] = object;
     }
 
-    ofxJSONElement imagesIndex;
-    for(int i = 0; i < imageCount; i++)
+
+    if(imageCount)
     {
-        std::time_t result = std::time(nullptr);
-        std::string fileName = ofFilePath::getAbsolutePath(imageNames[i] + to_string(result) + ".png");
-        imagesIndex[imageNames[i]] = fileName;
-        (*images[i])->save(fileName, OF_IMAGE_QUALITY_BEST);
+        ofxJSONElement imagesIndex;
+        for(int i = 0; i < imageCount; i++)
+        {
+            std::string fileName = imageDirectory + imageNames[i] + ".png";
+            imagesIndex[imageNames[i]] = fileName;
+            (*images[i])->save(fileName, OF_IMAGE_QUALITY_BEST);
+        }
+
+        root["images"] = imagesIndex;
     }
 
-    root["images"] = imagesIndex;
 }
 
 void SerializableLibrary::deserializeFromJSONString(const std::string& serialisedString)
@@ -76,7 +80,7 @@ void SerializableLibrary::writeToObject(int index)
 
     }
 
-    std::string stringId = std::to_string(objects[index]->getUniqueId());
+    std::string stringId = objects[index]->getUniqueId();
 
     Json::Value defaultValue;
 
@@ -129,7 +133,7 @@ void SerializableLibrary::writeToImage(int index)
         }
         else
         {
-            ofLogVerbose(__FUNCTION__) << "Tried to image to object with no data stored.";
+            ofLogVerbose(__FUNCTION__) << "Tried to write to image with no data stored.";
         }
     }
 }
