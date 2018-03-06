@@ -2,6 +2,7 @@
 #include "imgui_utils.h"
 #include "math.h"
 #include "file_load.h"
+#include "time_utils.h"
 
 
 
@@ -147,12 +148,8 @@ void ofApp::draw() {
                 screenCapture->grabScreen((int)state.focusedImagePos.x, (int)state.focusedImagePos.y,
                                           width, height);
 
-                auto now = std::chrono::system_clock::now();
-                const std::time_t nowTime = std::chrono::system_clock::to_time_t(now);
-                struct tm * t = localtime( &nowTime );
-                char* buffer = new char[64];
-                strftime(buffer, 64, "%Y-%m-%d-%H-%M-%S", t);
-                std::string formatedTime = std::string(buffer);
+                std::string formatedTime = TimeUtils::getCurrentTimeForFileName();
+
                 std::string directoryName = "experiment-data/experiment" + formatedTime + "/";
                 ofDirectory::createDirectory(directoryName);
                 experimentData.serializeAll(directoryName, "experiment.json");

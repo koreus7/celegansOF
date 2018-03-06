@@ -44,6 +44,7 @@ set( ${APP_NAME}_SOURCE_FILES
         src/constants.h
         src/experiment_metadata.cpp
         src/git_utils.h
+        src/time_utils.h
         ${TEST_FILES}
                 )
 

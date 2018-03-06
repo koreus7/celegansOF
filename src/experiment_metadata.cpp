@@ -1,5 +1,6 @@
 #include "experiment_metadata.h"
 #include "git_utils.h"
+#include "time_utils.h"
 
 void pushBranch(std::string branchName)
 {
@@ -9,9 +10,7 @@ void pushBranch(std::string branchName)
 
 void ExperimentMetadata::serialize(ofxJSONElement &root) const
 {
-
-    std::time_t unixTime = std::time(nullptr);
-    std::string branchName = "experiment" + std::to_string(unixTime);
+    std::string branchName = "experiment" + TimeUtils::getUnixTimeAsString();
 
     GitUtils::commitCurrentChangesToBranch(branchName, true);
 
@@ -32,6 +31,7 @@ std::string ExperimentMetadata::getUniqueId() const
 ExperimentMetadata::ExperimentMetadata()
 {
     commentsBuffer = new char[COMMENTS_BUFFER_SIZE];
+    memset(&commentsBuffer[0], 0, COMMENTS_BUFFER_SIZE);
 }
 
 ExperimentMetadata::~ExperimentMetadata()
