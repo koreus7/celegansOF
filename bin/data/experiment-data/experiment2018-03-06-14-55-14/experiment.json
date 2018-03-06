@@ -1,2 +1,0 @@
-{"BeamParameters":{"beamLength":27.35800170898438,"beamWidth":74.08500671386719,"fineMeshScale":2,"totalLength":800},"ExperimentMetadata":{"VERSION":"0.1","comments":"Low curvature accumulates more error with short beam."},"PointSelector":{"x":309,"y":193},"images":{"focused_image":"experiment-data/experiment2018-03-06-14-55-14/focused_image.png"}}
-

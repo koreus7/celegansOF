@@ -26,6 +26,7 @@ void ofApp::setup()
     
     state.selectedTailPos = &tailSelector.pos;
 
+    mainDrawArea.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
 
     // TODO Free this memory
     // The image looks like the background so it doesn't show but its
@@ -41,6 +42,7 @@ void ofApp::setup()
     experimentData.registerObject(experimentMetaData);
     experimentData.registerObject(tailSelector);
     experimentData.registerImage(&state.focusedImage, "focused_image");
+    experimentData.registerImage(&screenCapture, "result");
 
 }
 
@@ -53,9 +55,16 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() {
 
-	ofSetBackgroundColor(backgroundColor);
+    mainDrawArea.begin();
 
-	if (state.focusedImage) {
+    ofSetColor(backgroundColor);
+
+    ofDrawRectangle(0,0,ofGetWidth(), ofGetHeight());
+
+    //ofSetBackgroundColor(backgroundColor);
+
+	if (state.focusedImage)
+    {
 		
 		ofSetColor(255, 255, 255);
 		
@@ -68,6 +77,11 @@ void ofApp::draw() {
 	}
     
     beamSkeleton.drawBeamPreview();
+
+    mainDrawArea.end();
+
+    ofSetColor(255,255,255);
+    mainDrawArea.draw(0,0);
 
 	gui.begin();
 
@@ -126,6 +140,18 @@ void ofApp::draw() {
             ImGui::InputTextMultiline("Comments", experimentMetaData.commentsBuffer, experimentMetaData.COMMENTS_BUFFER_SIZE);
             if(ImGui::Button("Commit", ImVec2(100,20)))
             {
+
+                if(screenCapture != nullptr) {
+                    delete screenCapture;
+                }
+
+                screenCapture = new ofImage();
+                int width = (int)state.focusedImage->getWidth();
+                int height = (int)state.focusedImage->getHeight();
+                screenCapture->allocate(width, height, OF_IMAGE_COLOR);
+                screenCapture->grabScreen((int)state.focusedImagePos.x, (int)state.focusedImagePos.y,
+                                          width, height);
+
                 auto now = std::chrono::system_clock::now();
                 const std::time_t nowTime = std::chrono::system_clock::to_time_t(now);
                 struct tm * t = localtime( &nowTime );

@@ -40,13 +40,16 @@ class ofApp : public ofBaseApp{
 		GLuint previewImageIds[NUMBER_PREVIEW_IMAGES];
 		string previewPaths[NUMBER_PREVIEW_IMAGES];
 
+
+		ofFbo mainDrawArea;
+
 		PointSelector tailSelector;
 
 		BeamSkeleton beamSkeleton;
 
         AppState state;
 
-        ofImage* screenCapture;
+        ofImage* screenCapture = new ofImage();
 		SerializableLibrary experimentData;
         ExperimentMetadata experimentMetaData;
 
