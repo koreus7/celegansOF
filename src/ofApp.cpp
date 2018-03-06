@@ -34,8 +34,6 @@ void ofApp::setup()
     ofSetColor(backgroundColor);
     state.focusedImage = new ofImage();
     state.focusedImage->allocate(128,128, OF_IMAGE_COLOR);
-    state.focusedImage->clear();
-
 
     experimentData.registerObject(beamSkeleton);
     experimentData.registerObject(beamSkeleton.parameters);
@@ -141,10 +139,7 @@ void ofApp::draw() {
             if(ImGui::Button("Commit", ImVec2(100,20)))
             {
 
-                if(screenCapture != nullptr) {
-                    delete screenCapture;
-                }
-
+                delete screenCapture;
                 screenCapture = new ofImage();
                 int width = (int)state.focusedImage->getWidth();
                 int height = (int)state.focusedImage->getHeight();
@@ -162,6 +157,7 @@ void ofApp::draw() {
                 ofDirectory::createDirectory(directoryName);
                 experimentData.serializeAll(directoryName, "experiment.json");
                 showLogWindow = false;
+
             }
             ImGui::End();
 
