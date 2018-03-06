@@ -1,24 +1,22 @@
 #include "experiment_metadata.h"
+#include "git_utils.h"
+
+void pushBranch(std::string branchName)
+{
+    std::string pushCommand = "git push origin " + branchName;
+    std::system(pushCommand.c_str());
+}
 
 void ExperimentMetadata::serialize(ofxJSONElement &root) const
 {
 
     std::time_t unixTime = std::time(nullptr);
-    std::string version = "experiment" + std::to_string(unixTime);
-    std::system("git stash");
-    std::string checkoutCommand ="git checkout -b " + version;
-    std::system(checkoutCommand.c_str());
-    std::system("git stash apply");
-    std::system("git add -A :/");
-    std::string commitCommand = "git commit -m \"" + version + "\"";
-    std::system(commitCommand.c_str());
-    std::string pushCommand = "git push origin " + version;
-    std::system(pushCommand.c_str());
-    std::system("git checkout master");
-    std::system("git stash pop");
+    std::string branchName = "experiment" + std::to_string(unixTime);
+
+    GitUtils::commitCurrentChangesToBranch(branchName, true);
 
     root["comments"] = Json::Value(commentsBuffer);
-    root["VERSION"] = version;
+    root["VERSION"] = branchName;
 }
 
 void ExperimentMetadata::deserialize(const ofxJSONElement &root)

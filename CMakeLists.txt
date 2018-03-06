@@ -43,6 +43,7 @@ set( ${APP_NAME}_SOURCE_FILES
         src/file_load.cpp
         src/constants.h
         src/experiment_metadata.cpp
+        src/git_utils.h
         ${TEST_FILES}
                 )
 
