@@ -2,12 +2,6 @@
 #include "git_utils.h"
 #include "time_utils.h"
 
-void pushBranch(std::string branchName)
-{
-    std::string pushCommand = "git push origin " + branchName;
-    std::system(pushCommand.c_str());
-}
-
 void ExperimentMetadata::serialize(ofxJSONElement &root) const
 {
     std::string branchName = "experiment" + TimeUtils::getUnixTimeAsString();
