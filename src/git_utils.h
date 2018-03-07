@@ -6,6 +6,11 @@
 namespace GitUtils
 {
 
+    void clearStash()
+    {
+        std::system("git stash clear");
+    }
+
     void stashCurrentChanges()
     {
         std::system("git stash");

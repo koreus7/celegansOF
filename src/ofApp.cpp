@@ -199,6 +199,10 @@ void ofApp::commitExperiment()
         strcpy(experimentMetaData.nameBuffer, experimentName.c_str());
     }
 
+    // If we have no current changes then
+    // we will end up popping whatever was on the stash
+    // so make sure we clear it first.
+    GitUtils::clearStash();
     GitUtils::stashCurrentChanges();
     GitUtils::checkoutNewBranch(experimentName);
     GitUtils::applyStashedChanges();
