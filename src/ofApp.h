@@ -17,7 +17,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 
-		void keyPressed(int key) final;
+		void keyPressed(int key) override;
 		void keyReleased(int key) override;
 		void mouseMoved(int x, int y ) override;
 		void mouseDragged(int x, int y, int button) override;
@@ -28,6 +28,10 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo) override;
 		void gotMessage(ofMessage msg);
         void exit() override;
+
+        void loadImage();
+        void loadExperiment();
+        void commitExperiment();
 
 		ofxImGui::Gui gui;
 		

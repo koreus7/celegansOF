@@ -1,8 +1,9 @@
+#include <regex>
 #include "ofApp.h"
 #include "imgui_utils.h"
-#include "math.h"
 #include "file_load.h"
 #include "time_utils.h"
+#include "git_utils.h"
 
 
 
@@ -57,10 +58,7 @@ void ofApp::draw() {
     mainDrawArea.begin();
 
     ofSetColor(backgroundColor);
-
-    ofDrawRectangle(0,0,ofGetWidth(), ofGetHeight());
-
-    //ofSetBackgroundColor(backgroundColor);
+    ofDrawRectangle(0,0, ofGetWidth(), ofGetHeight());
 
 	if (state.focusedImage)
     {
@@ -97,64 +95,31 @@ void ofApp::draw() {
 		//this will change the app background color
 		//ImGui::ColorEdit3("Background Color", (float*)&backgroundColor);
 		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		if (ImGui::Button("Load", ImVec2(120, 20))) {
 
-			ofFileDialogResult openFileResult = ofSystemLoadDialog("Select a jpg or png worm image.");
-			
-			if (openFileResult.bSuccess)
-            {
-				string path = openFileResult.getPath();
-				ofImage image = loadFromPath(path);
-				ofImage previewImage = image;
-				previewImage.resize(PREVIEW_SIZE, PREVIEW_SIZE);
+        if (ImGui::Button("Image Load", ImVec2(120, 20))) {
 
-				previewImages[previewCount] = image;
-				previewImageIds[previewCount] = gui.loadImage(previewImage);
-				previewPaths[previewCount] = path;
-
-				previewCount = (previewCount + 1) % NUMBER_PREVIEW_IMAGES;
-			}
-
+            loadImage();
 		}
 
-        if(ImGui::Button("Log Experiment", ImVec2(120,20)))
+        if(ImGui::Button("Experiment Load", ImVec2(120,20)))
+        {
+            loadExperiment();
+        }
+
+        if(ImGui::Button("Log", ImVec2(120,20)))
         {
             showLogWindow = true;
         }
 
-        if(ImGui::Button("Load Experiment", ImVec2(120,20)))
-        {
-            ofFileDialogResult openFileResult = ofSystemLoadDialog("Select Experiment JSON file");
-
-            if (openFileResult.bSuccess)
-            {
-                string path = openFileResult.getPath();
-                experimentData.deserializeFromFile(path);
-            }
-        }
 
         if(showLogWindow) {
 
             ImGui::Begin("Log Experiment", &showLogWindow);
             ImGui::InputTextMultiline("Comments", experimentMetaData.commentsBuffer, experimentMetaData.COMMENTS_BUFFER_SIZE);
+            ImGui::InputText("Name", experimentMetaData.nameBuffer, experimentMetaData.NAME_BUFFER_SIZE);
             if(ImGui::Button("Commit", ImVec2(100,20)))
             {
-
-                delete screenCapture;
-                screenCapture = new ofImage();
-                int width = (int)state.focusedImage->getWidth();
-                int height = (int)state.focusedImage->getHeight();
-                screenCapture->allocate(width, height, OF_IMAGE_COLOR);
-                screenCapture->grabScreen((int)state.focusedImagePos.x, (int)state.focusedImagePos.y,
-                                          width, height);
-
-                std::string formatedTime = TimeUtils::getCurrentTimeForFileName();
-
-                std::string directoryName = "experiment-data/experiment" + formatedTime + "/";
-                ofDirectory::createDirectory(directoryName);
-                experimentData.serializeAll(directoryName, "experiment.json");
-                showLogWindow = false;
-
+                commitExperiment();
             }
             ImGui::End();
 
@@ -176,6 +141,69 @@ void ofApp::draw() {
     
     beamSkeleton.update();
     
+}
+
+void ofApp::loadImage()
+{
+    ofFileDialogResult openFileResult = ofSystemLoadDialog("Select a jpg or png worm image.");
+
+    if (openFileResult.bSuccess)
+    {
+        string path = openFileResult.getPath();
+        ofImage image = loadFromPath(path);
+        ofImage previewImage = image;
+        previewImage.resize(PREVIEW_SIZE, PREVIEW_SIZE);
+
+        previewImages[previewCount] = image;
+        previewImageIds[previewCount] = gui.loadImage(previewImage);
+        previewPaths[previewCount] = path;
+
+        previewCount = (previewCount + 1) % NUMBER_PREVIEW_IMAGES;
+    }
+}
+
+void ofApp::loadExperiment()
+{
+    ofFileDialogResult openFileResult = ofSystemLoadDialog("Select Experiment JSON file");
+
+    if (openFileResult.bSuccess)
+    {
+        string path = openFileResult.getPath();
+        experimentData.deserializeFromFile(path);
+    }
+}
+
+void ofApp::commitExperiment()
+{
+    delete screenCapture;
+    screenCapture = new ofImage();
+
+    ofPixels pixels;
+    mainDrawArea.readToPixels(pixels);
+    ofImage fullScreen = ofImage(pixels);
+
+    screenCapture->cropFrom(fullScreen, (int)state.focusedImagePos.x, (int)state.focusedImagePos.y,
+                            (int)state.focusedImage->getWidth(), (int)state.focusedImage->getHeight() );
+
+    std::string experimentName = std::string(experimentMetaData.nameBuffer);
+    std::regex directoryNameRegex("[_a-zA-Z0-9\\-\\.]+");
+
+    // If the name is empty or not a valid file name then
+    // the experiment is named by timestamp.
+    if(!std::regex_match(experimentName, directoryNameRegex))
+    {
+        std::string formatedTime = TimeUtils::getCurrentTimeForFileName();
+        experimentName = "experiment" + formatedTime;
+        strcpy(experimentMetaData.nameBuffer, experimentName.c_str());
+    }
+
+    std::string directoryName = "experiment-data/" + experimentName + "/";
+    ofDirectory::createDirectory(directoryName);
+    experimentData.serializeAll(directoryName, "experiment.json");
+
+    GitUtils::commitCurrentChangesToBranch(experimentName, true);
+
+    showLogWindow = false;
 }
 
 //--------------------------------------------------------------

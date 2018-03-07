@@ -45,7 +45,7 @@ namespace GitUtils
         std::system("git stash apply && git add -A :/");
 
         // Commit the changes to the branch.
-        commit(branchName + "working changes");
+        commit(branchName);
 
         // Change back to master branch and put our changes back in place.
         std::system("git checkout master && git stash pop");
