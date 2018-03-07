@@ -186,9 +186,11 @@ void ofApp::commitExperiment()
                             (int)state.focusedImage->getWidth(), (int)state.focusedImage->getHeight() );
 
     std::string experimentName = std::string(experimentMetaData.nameBuffer);
+
+    // Alphanumeric separated by dashes spaces or dots.
     std::regex directoryNameRegex("[_a-zA-Z0-9\\-\\.]+");
 
-    // If the name is empty or not a valid file name then
+    // If the name is empty or not a valid directory name then
     // the experiment is named by timestamp.
     if(!std::regex_match(experimentName, directoryNameRegex))
     {
@@ -197,11 +199,19 @@ void ofApp::commitExperiment()
         strcpy(experimentMetaData.nameBuffer, experimentName.c_str());
     }
 
+    GitUtils::stashCurrentChanges();
+    GitUtils::checkoutNewBranch(experimentName);
+    GitUtils::applyStashedChanges();
+
     std::string directoryName = "experiment-data/" + experimentName + "/";
     ofDirectory::createDirectory(directoryName);
     experimentData.serializeAll(directoryName, "experiment.json");
 
-    GitUtils::commitCurrentChangesToBranch(experimentName, true);
+    GitUtils::stageAllAndCommit(experimentName);
+    GitUtils::checkoutMaster();
+    GitUtils::popStashedChanges();
+
+    GitUtils::pushBranchToOriginInBackgroundThread(experimentName);
 
     showLogWindow = false;
 }

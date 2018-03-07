@@ -5,57 +5,52 @@
 
 namespace GitUtils
 {
-    namespace
+
+    void stashCurrentChanges()
     {
-
-        void pushBranch(std::string branchName)
-        {
-            std::string pushCommand = "git push origin " + branchName;
-            std::system(pushCommand.c_str());
-        }
-
-        void checkoutBranch(std::string branchName)
-        {
-            std::string checkoutCommand ="git checkout -b " + branchName;
-            std::system(checkoutCommand.c_str());
-        }
-
-        void commit(std::string message)
-        {
-            std::string commitCommand = "git commit -m \"" + message + "\"";
-            std::system(commitCommand.c_str());
-        }
-
-    }
-
-
-    /// Commit the working changes to a branch then return to master as if nothing happened.
-    /// Changes are pushed to origin asynchronously.
-    /// \param branchName
-    /// \param pushChanges
-    void commitCurrentChangesToBranch(std::string branchName, bool pushChanges)
-    {
-        // Stash the current changes.
         std::system("git stash");
-
-        // Checkout the new branch.
-        checkoutBranch(branchName);
-
-        // Apply the changes from the stash to the new branch and stage them.
-        std::system("git stash apply && git add -A :/");
-
-        // Commit the changes to the branch.
-        commit(branchName);
-
-        // Change back to master branch and put our changes back in place.
-        std::system("git checkout master && git stash pop");
-
-        // Push to git in seperate thread so we don't wait for network io.
-        if(pushChanges)
-        {
-            std::thread pushThread(pushBranch, branchName);
-            pushThread.detach();
-        }
     }
+
+    void checkoutMaster()
+    {
+        std::system("git checkout master");
+    }
+
+    void checkoutNewBranch(const std::string &branchName)
+    {
+        std::string checkoutCommand ="git checkout -b " + branchName;
+        std::system(checkoutCommand.c_str());
+    }
+
+    void applyStashedChanges()
+    {
+        std::system("git stash apply");
+    }
+
+    void popStashedChanges()
+    {
+        std::system("git stash pop");
+    }
+
+    void stageAllAndCommit(const std::string& message)
+    {
+        std::system("git add -A :/");
+        std::string commitCommand = "git commit -m \"" + message + "\"";
+        std::system(commitCommand.c_str());
+    }
+
+
+    void pushBranchToOrigin(const std::string &branchName)
+    {
+        std::string pushCommand = "git push origin " + branchName;
+        std::system(pushCommand.c_str());
+    }
+
+    void pushBranchToOriginInBackgroundThread(std::string branchName)
+    {
+        std::thread pushThread(pushBranchToOrigin, branchName);
+        pushThread.detach();
+    }
+
 
 }
