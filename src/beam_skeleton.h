@@ -10,7 +10,7 @@
 class BeamSkeleton : public ISerializable
 {
 public:
-	~BeamSkeleton();
+	~BeamSkeleton() override;
 	void fitImage(const ofImage& image, ofVec2f tailPoint);
 	bool isFitDone();
 	void step();
@@ -26,8 +26,7 @@ public:
 
 	std::string getUniqueId() const override;
 
-	ofFbo debugFBO;
-	float angleStep = 0.2;
+	float angleStep = 0.2f;
     BeamParameters parameters;
 
 private:
@@ -47,12 +46,10 @@ private:
 
 	ofVec2f workingPoint;
 
-	static const int fineMeshScale = 3;
     static const int MAX_BEAM_SIZE = 128;
     
     ofShader beamShader;
     ofFbo beamPreviewFBO;
-    
     
     AppState* appState;
 
