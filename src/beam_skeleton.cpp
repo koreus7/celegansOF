@@ -84,6 +84,7 @@ void BeamSkeleton::fitImage(const ofImage& image, ofVec2f tailPoint)
 
 	totalSteps = (int)floor(parameters.totalLength / (0.5*parameters.beamLength));
 	stepCount = 0;
+	lastAngle = 0.0f;
 
 	if (totalSteps == 0) 
 	{
