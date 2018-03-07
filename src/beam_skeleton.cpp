@@ -4,7 +4,6 @@
 BeamSkeleton::~BeamSkeleton()
 {
 	delete scaledImage;
-	scaledImage = nullptr;
 }
 
 void BeamSkeleton::setup(AppState* appState)
@@ -12,8 +11,6 @@ void BeamSkeleton::setup(AppState* appState)
     this->appState = appState;
     
     beamShader.load("shadersGL3/beam");
-
-    debugFBO.allocate(ofGetWidth(), ofGetHeight(), GL_RGB);
 
 	ofFbo::Settings fboSettings;
 	fboSettings.width = MAX_BEAM_SIZE;
@@ -29,11 +26,11 @@ void BeamSkeleton::setup(AppState* appState)
 const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
 {
 
-	const int BEAM_RES_X = floor(parameters.beamLength);
-	const int BEAM_RES_Y = floor(parameters.beamWidth);
+	const int BEAM_RES_X = (int)floor(parameters.beamLength);
+	const int BEAM_RES_Y = (int)floor(parameters.beamWidth);
 
-	const int imageWidth = scaledImage->getWidth();
-	const int imageHeight = scaledImage->getHeight();
+	const int imageWidth = (int)scaledImage->getWidth();
+	const int imageHeight = (int)scaledImage->getHeight();
 
 	const ofPixels& imagePixels = scaledImage->getPixels();
 
@@ -46,22 +43,14 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
 	{
 		for (int y = -BEAM_RES_Y/2; y < BEAM_RES_Y/2; y++)
 		{
-			float length = sqrt(x*x + y*y);
+			float length = sqrtf(x*x + y*y);
 
-			int imageX = floor(cos(atan2(y, x) + angle)*length + beamStart.x);
-			int imageY = floor(-sin(atan2(y, x) + angle)*length + beamStart.y);
+			int imageX = (int)floor(cosf(atan2f(y, x) + angle)*length + beamStart.x);
+			int imageY = (int)floor(-sinf(atan2f(y, x) + angle)*length + beamStart.y);
 
 			// If the pixel is out of bounds.
 			if (imageX < 0 || imageY < 0 || imageX >= imageWidth || imageY >= imageHeight) 
 			{
-				if (imageX > 0 && imageY > 0 && imageX < debugFBO.getWidth() && imageY < debugFBO.getHeight())
-				{
-					debugFBO.begin();
-					ofSetColor(255, 0, 0);
-					ofDrawRectangle(imageX/parameters.fineMeshScale, imageY/parameters.fineMeshScale, 1, 1);
-					debugFBO.end();
-				}
-				//ofLogVerbose(__FUNCTION__) << "Pixel out of range for error calc " << imageX << " " << imageY;
 				errorSum += 2;
 			}
 			else
@@ -84,35 +73,16 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
 
 const float BeamSkeleton::getBeamPixel(float beamY)
 {
-	
-	//beamAngle = PI - beamAngle;
-
-	////Convert into local frame.
-	//float r = fabs(tan(beamAngle)*(testPoint.x - beamstart.x) + beamstart.y - testPoint.y) / sqrt(1 + tan(beamAngle)*tan(beamAngle));
-	
-	return 1.0f - 0.5f * (1 + cos((PI*beamY) / (parameters.beamWidth*0.5f)));
+	return 1.0f - 0.5f * (1 + cosf(((float)PI*beamY) / (parameters.beamWidth*0.5f)));
 }
 
 void BeamSkeleton::fitImage(const ofImage& image, ofVec2f tailPoint)
 {
-
-	debugFBO.begin();
-	ofSetColor(255, 255, 0);
-	ofDrawRectangle(tailPoint.x, tailPoint.y, 1, 1);
-	debugFBO.end();
-
-
-	if (scaledImage) {
-
-		delete scaledImage;
-
-	}
-
+	delete scaledImage;
 	scaledImage = new ofImage(image);
-	scaledImage->resize(image.getWidth()*parameters.fineMeshScale, image.getHeight()*parameters.fineMeshScale);
+	scaledImage->resize((int)image.getWidth()*parameters.fineMeshScale, (int)image.getHeight()*parameters.fineMeshScale);
 
-
-	totalSteps = floor(parameters.totalLength / (0.5*parameters.beamLength));
+	totalSteps = (int)floor(parameters.totalLength / (0.5*parameters.beamLength));
 	stepCount = 0;
 
 	if (totalSteps == 0) 
@@ -125,12 +95,6 @@ void BeamSkeleton::fitImage(const ofImage& image, ofVec2f tailPoint)
 	polyLine.addVertex(ofVec2f(tailPoint));
 
 	workingPoint = tailPoint * parameters.fineMeshScale;
-
-	debugFBO.begin();
-	ofSetColor(0, 255, 0);
-	ofDrawRectangle(1, 1, 1, 1);
-	debugFBO.end();
-	
 }
 
 bool BeamSkeleton::isFitDone()
@@ -141,13 +105,8 @@ bool BeamSkeleton::isFitDone()
 void BeamSkeleton::step()
 {
 	float testAngle, nextAngle = 0;
-	int angleSteps = floor(PI / angleStep);
+	int angleSteps = (int)floor(PI / angleStep);
 	float minError, testError;
-
-	debugFBO.begin();
-	ofSetColor(0, 0, 255);
-	ofDrawRectangle(workingPoint.x/parameters.fineMeshScale, workingPoint.y/parameters.fineMeshScale, 1, 1);
-	debugFBO.end();
 
 	for (int j = 0; j < angleSteps; j++)
 	{
@@ -162,10 +121,6 @@ void BeamSkeleton::step()
 
 		testError = getSquaredError(workingPoint, testAngle);
 
-		//ofLogVerbose(__FUNCTION__) << "Err" << testError;
-
-		// Error maxes out around 6000
-
 		if (j == 0 || testError < minError)
 		{
 			minError = testError;
@@ -174,16 +129,13 @@ void BeamSkeleton::step()
 
 	}
 
-	workingPoint.x = workingPoint.x + 0.5*parameters.beamLength * cos(nextAngle);
-	workingPoint.y = workingPoint.y - 0.5*parameters.beamLength * sin(nextAngle);
+	workingPoint.x = workingPoint.x + 0.5f*parameters.beamLength * cosf(nextAngle);
+	workingPoint.y = workingPoint.y - 0.5f*parameters.beamLength * sinf(nextAngle);
 	polyLine.addVertex(workingPoint / parameters.fineMeshScale);
 
 	lastAngle = nextAngle;
 
 	ofImage img;
-	/*img.allocate(debugFBO.getWidth(), debugFBO.getHeight(), OF_IMAGE_COLOR);
-	debugFBO.readToPixels(img.getPixels());
-	img.save("debug.png", OF_IMAGE_QUALITY_BEST);*/
 	stepCount++;
 }
 
