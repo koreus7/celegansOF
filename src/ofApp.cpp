@@ -23,10 +23,7 @@ void ofApp::setup()
 
 	backgroundColor = ofColor(114, 144, 154);
 
-	tailSelector.setup();
     beamSkeleton.setup(&state);
-    
-    state.selectedTailPos = &tailSelector.pos;
 
     mainDrawArea.allocate(ofGetWidth(), ofGetHeight(), GL_RGBA);
 
@@ -40,7 +37,8 @@ void ofApp::setup()
     experimentData.registerObject(beamSkeleton);
     experimentData.registerObject(beamSkeleton.parameters);
     experimentData.registerObject(experimentMetaData);
-    experimentData.registerObject(tailSelector);
+    experimentData.registerObject(beamSkeleton.tailPoint);
+    experimentData.registerObject(beamSkeleton.skeletonPoint);
     experimentData.registerImage(&state.focusedImage, "focused_image");
     experimentData.registerImage(&screenCapture, "result");
 
@@ -69,8 +67,6 @@ void ofApp::draw() {
 		state.focusedImagePos.y = (ofGetHeight() - state.focusedImage->getHeight())*0.5f;
 		state.focusedImage->draw(state.focusedImagePos);
 		beamSkeleton.draw(state.focusedImagePos.x, state.focusedImagePos.y);
-		tailSelector.draw();
-
 	}
     
     beamSkeleton.drawBeamPreview();
@@ -82,7 +78,6 @@ void ofApp::draw() {
 
 	gui.begin();
 
-	tailSelector.injectGUI();
     beamSkeleton.injectGUI();
 
 	if (!themeSet) {

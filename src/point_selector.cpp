@@ -1,18 +1,15 @@
 #include "point_selector.h"
 
 
-
-void PointSelector::setup() {
+void PointSelector::setup(std::string name)
+{
+	this->name = name;
+	selectorIndex = selectorCount;
+	selectorCount++;
 
 	ofAddListener(ofEvents().mousePressed, this, &PointSelector::mousePressed);
 	ofAddListener(ofEvents().mouseReleased, this, &PointSelector::mouseReleased);
 }
-
-
-//PointSelector::PointSelector()
-//{
-//
-//}
 
 
 PointSelector::~PointSelector()
@@ -34,8 +31,8 @@ void PointSelector::draw()
 		ofSetColor(notActiveColor);
 	}
 
-	ofDrawLine(pos.x - CROSS_SIZE/2, pos.y, pos.x + CROSS_SIZE/2, pos.y);
-	ofDrawLine(pos.x, pos.y - CROSS_SIZE/2, pos.x, pos.y + CROSS_SIZE/2);
+	ofDrawLine(pos.x - CROSS_SIZE/2 - 1, pos.y, pos.x + CROSS_SIZE/2, pos.y );
+	ofDrawLine(pos.x, pos.y - CROSS_SIZE/2 - 1, pos.x, pos.y + CROSS_SIZE/2);
 }
 
 void PointSelector::mousePressed(ofMouseEventArgs & mouse)
@@ -74,7 +71,9 @@ void PointSelector::mouseReleased(ofMouseEventArgs & mouse)
 void PointSelector::injectGUI()
 {
 
-	ImGui::Begin("Point Selector", &guiVisible);
+	active = activeSelector == selectorIndex;
+
+	ImGui::Begin(name.c_str(), &guiVisible);
 
 	if (active) {
 		ImGui::TextColored(ofColor(0, 255, 0), "ACTIVE");
@@ -83,6 +82,12 @@ void PointSelector::injectGUI()
 	}
 
 	ImGui::Text("Selected Point X: %.3f  Y: %.3f", pos.x, pos.y);
+
+	if(ImGui::Button("Set", ImVec2(100,20)))
+	{
+		activeSelector = selectorIndex;
+	}
+
 	ImGui::End();
 
 }
@@ -101,5 +106,9 @@ void PointSelector::deserialize(const ofxJSONElement &root)
 
 std::string PointSelector::getUniqueId() const
 {
-	return "PointSelector";
+	return "PointSelector" + name;
 }
+
+int PointSelector::activeSelector = 0;
+int PointSelector::selectorCount = 0;
+
