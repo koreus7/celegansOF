@@ -63,6 +63,7 @@ private:
 	// a beam at each angle for every point tested.
 	float errorAtPointAngles[MAX_POINTS*MAX_ANGLES];
     float maxErrorAtPoint[MAX_POINTS];
+	float minErrorAtPoint[MAX_POINTS];
 
 	float getErrorAtPointAngle(int point, int angleStep);
     void setErrorAtPointAngle(int point, int angleStep, float error);

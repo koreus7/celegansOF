@@ -86,7 +86,7 @@ void BeamSkeleton::fitImage(const ofImage& image)
 	scaledImage->resize((int)image.getWidth()*parameters.fineMeshScale, (int)image.getHeight()*parameters.fineMeshScale);
 
     totalAngleSteps = (int)floor(PI / angleGranularity);
-	totalSteps = (int)floor(parameters.totalLength / (0.5*parameters.beamLength));
+	totalSteps = (int)floor((parameters.totalLength) / (0.5*(parameters.beamLength)));
 	stepCount = 0;
 	lastAngle = 0.0f;
 
@@ -128,8 +128,10 @@ void BeamSkeleton::setErrorAtPointAngle(int point, int angleStep, float error)
 
 void BeamSkeleton::step()
 {
-	float testAngle, nextAngle = 0;
-	float minError, testError;
+	float testAngle = 0;
+    float nextAngle = 0;
+	float minError  = 0;
+    float testError = 0;
 
     centerAngleAtPoint[stepCount] = lastAngle;
     maxErrorAtPoint[stepCount] = 0;
@@ -153,8 +155,10 @@ void BeamSkeleton::step()
         setErrorAtPointAngle(stepCount, j, testError);
 	}
 
-	workingPoint.x = workingPoint.x + 0.5f*parameters.beamLength * cosf(nextAngle);
-	workingPoint.y = workingPoint.y - 0.5f*parameters.beamLength * sinf(nextAngle);
+    minErrorAtPoint[stepCount] = minError;
+
+	workingPoint.x = workingPoint.x + 0.5f*parameters.beamLength * parameters.fineMeshScale * cosf(nextAngle);
+	workingPoint.y = workingPoint.y - 0.5f*parameters.beamLength * parameters.fineMeshScale * sinf(nextAngle);
 	polyLine.addVertex(workingPoint / parameters.fineMeshScale);
 
 	lastAngle = nextAngle;
@@ -192,11 +196,15 @@ void BeamSkeleton::draw(float x, float y)
                         (fanShowState == SHOW_SINGLE_FAN && closestVertexToSelectorIndex == i))
                 {
                     ofPoint p = polyLine[i];
-                    int scaledError = (int)floor(255*(1.0 - getErrorAtPointAngle(i,j)/maxErrorAtPoint[i]));
+
+                    float minErr = minErrorAtPoint[i];
+                    float maxErr = maxErrorAtPoint[i];
+                    float err = getErrorAtPointAngle(i,j);
+
+                    int scaledError = (int)floor(255*(1.0 - (err - minErr)/(maxErr - minErr)));
                     ofSetColor(255, 0, 0, scaledError);
                     float angle = getFanAngle(i, j);
-                    float imageBeamLength = parameters.beamLength/parameters.fineMeshScale;
-                    ofDrawLine(p.x,p.y, p.x + cosf(angle)*imageBeamLength, p.y - sinf(angle)*imageBeamLength);
+                    ofDrawLine(p.x,p.y, p.x + cosf(angle)*parameters.beamLength, p.y - sinf(angle)*parameters.beamLength);
                 }
             }
         }
