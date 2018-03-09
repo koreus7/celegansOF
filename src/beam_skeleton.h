@@ -34,8 +34,8 @@ public:
     PointSelector tailPoint;
 
 private:
-	const float getSquaredError(ofVec2f beamStart, float angle);
-	const float getBeamPixel(float beamY);
+	const float getSquaredError(ofVec2f beamStart, float angle, bool invertBeam);
+	const float getBeamPixel(float beamY, bool invertBeam);
 	const float getFanAngle(int pointIndex, int angleStep);
 
 	ofImage* scaledImage;
@@ -75,6 +75,9 @@ private:
     ofShader beamShader;
     ofFbo beamPreviewFBO;
 
+	void onKeyReleased(ofKeyEventArgs & keyArgs);
+
+    bool hideAll = false;
     bool showPoints = true;
 
     const static int HIDE_FAN = 0;
@@ -85,7 +88,5 @@ private:
 	unsigned closestVertexToSelectorIndex;
     
     AppState* appState;
-
-    float errorHistogramGetter(void *data, int index);
 };
 

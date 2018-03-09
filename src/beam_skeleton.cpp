@@ -4,6 +4,16 @@
 BeamSkeleton::~BeamSkeleton()
 {
 	delete scaledImage;
+    ofRemoveListener(ofEvents().keyReleased, this, &BeamSkeleton::onKeyReleased);
+}
+
+void BeamSkeleton::onKeyReleased(ofKeyEventArgs &keyArgs)
+{
+    if(keyArgs.key == 'o')
+    {
+        this->hideAll = !this->hideAll;
+    }
+
 }
 
 void BeamSkeleton::setup(AppState* appState)
@@ -24,9 +34,11 @@ void BeamSkeleton::setup(AppState* appState)
 
     tailPoint.setup("Tail Point");
     skeletonPoint.setup("Skeleton Vertex");
+
+    ofAddListener(ofEvents().keyReleased, this, &BeamSkeleton::onKeyReleased);
 }
 
-const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
+const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, bool invertBeam)
 {
 
 	const int BEAM_RES_X = (int)floor(parameters.beamLength);
@@ -59,7 +71,7 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
 			else
 			{
 				ofColor imageSample = imagePixels.getColor(imageX, imageY);
-				float beamSample = getBeamPixel(y);
+				float beamSample = getBeamPixel(y, invertBeam);
 
 				// Assuming grayscale so G, B and A channels are redundant.
 				float error = beamSample - imageSample.r / 255.0f;
@@ -74,9 +86,10 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle)
 
 }
 
-const float BeamSkeleton::getBeamPixel(float beamY)
+const float BeamSkeleton::getBeamPixel(float beamY, bool invertBeam)
 {
-	return 1.0f - 0.5f * (1 + cosf(((float)PI*beamY) / (parameters.beamWidth*0.5f)));
+    float beamPixel = 0.5f * (1 + cosf(((float)PI*beamY) / (parameters.beamWidth*0.5f)));
+    return invertBeam? 1.0f - beamPixel : beamPixel;
 }
 
 void BeamSkeleton::fitImage(const ofImage& image)
@@ -88,7 +101,7 @@ void BeamSkeleton::fitImage(const ofImage& image)
     totalAngleSteps = (int)floor(PI / angleGranularity);
 	totalSteps = (int)floor((parameters.totalLength) / (0.5*(parameters.beamLength)));
 	stepCount = 0;
-	lastAngle = 0.0f;
+	lastAngle = parameters.initialAngle;
 
 	if (totalSteps == 0) 
 	{
@@ -139,7 +152,8 @@ void BeamSkeleton::step()
 	for (int j = 0; j < totalAngleSteps; j++)
 	{
         testAngle = getFanAngle(stepCount, j);
-		testError = getSquaredError(workingPoint, testAngle);
+		testError = min(0.1f*getSquaredError(workingPoint, testAngle, true),
+                        getSquaredError(workingPoint, testAngle, false));
 
 		if (j == 0 || testError < minError)
 		{
@@ -168,53 +182,54 @@ void BeamSkeleton::step()
 
 void BeamSkeleton::draw(float x, float y)
 {
-
-	ofTranslate(x, y);
-	ofSetColor(255, 255, 255, 255);
-	polyLine.draw();
-
-    ofSetColor(0,255,0,255);
-
-    if(showPoints)
+    if(!hideAll)
     {
-        for(int i = 0; i < polyLine.size(); i++)
+        ofTranslate(x, y);
+        ofSetColor(255, 255, 255, 255);
+        polyLine.draw();
+
+        ofSetColor(0,255,0,255);
+
+        if(showPoints)
         {
-            ofPoint p = polyLine[i];
-            ofDrawCircle(p, 2);
-        }
-
-    }
-
-
-    if(fanShowState != HIDE_FAN)
-    {
-        for(int i = 0; i < stepCount; i++)
-        {
-            for(int j = 0; j < totalAngleSteps; j++)
+            for(int i = 0; i < polyLine.size(); i++)
             {
-                if(fanShowState == SHOW_ALL_FAN ||
-                        (fanShowState == SHOW_SINGLE_FAN && closestVertexToSelectorIndex == i))
-                {
-                    ofPoint p = polyLine[i];
-
-                    float minErr = minErrorAtPoint[i];
-                    float maxErr = maxErrorAtPoint[i];
-                    float err = getErrorAtPointAngle(i,j);
-
-                    int scaledError = (int)floor(255*(1.0 - (err - minErr)/(maxErr - minErr)));
-                    ofSetColor(255, 0, 0, scaledError);
-                    float angle = getFanAngle(i, j);
-                    ofDrawLine(p.x,p.y, p.x + cosf(angle)*parameters.beamLength, p.y - sinf(angle)*parameters.beamLength);
-                }
+                ofPoint p = polyLine[i];
+                ofDrawCircle(p, 2);
             }
         }
 
+        if(fanShowState != HIDE_FAN)
+        {
+            for(int i = 0; i < stepCount; i++)
+            {
+                for(int j = 0; j < totalAngleSteps; j++)
+                {
+                    if(fanShowState == SHOW_ALL_FAN ||
+                       (fanShowState == SHOW_SINGLE_FAN && closestVertexToSelectorIndex == i))
+                    {
+                        ofPoint p = polyLine[i];
+
+                        float minErr = minErrorAtPoint[i];
+                        float maxErr = maxErrorAtPoint[i];
+                        float err = getErrorAtPointAngle(i,j);
+
+                        int scaledError = (int)floor(255*(1.0 - (err - minErr)/(maxErr - minErr)));
+                        ofSetColor(255, 0, 0, scaledError);
+                        float angle = getFanAngle(i, j);
+                        ofDrawLine(p.x,p.y, p.x + cosf(angle)*parameters.beamLength, p.y - sinf(angle)*parameters.beamLength);
+                    }
+                }
+            }
+
+        }
+
+        ofTranslate(-x, -y);
+
+        skeletonPoint.draw();
+        tailPoint.draw();
+
     }
-
-    ofTranslate(-x, -y);
-
-    skeletonPoint.draw();
-    tailPoint.draw();
 }
 
 void BeamSkeleton::update()
@@ -273,6 +288,7 @@ void BeamSkeleton::injectGUI()
     ImGui::SliderFloat("Beam Length", &parameters.beamLength, 1, MAX_BEAM_SIZE);
     ImGui::DragFloat("Total Length", &parameters.totalLength, 1.0f, 1.0f,1000.0f,"%.3f");
     ImGui::SliderInt("Fine mesh scale", &parameters.fineMeshScale, 1, 5);
+    ImGui::SliderFloat("InitialAngle", &parameters.initialAngle, 0.0f, 2.0f*(float)PI, "%.3f");
     ImGui::PopItemWidth();
     ImGui::Checkbox("Show Progress", &showProgress);
     if (ImGui::Button("Run Fit", ImVec2(100, 20)))
