@@ -152,8 +152,7 @@ void BeamSkeleton::step()
 	for (int j = 0; j < totalAngleSteps; j++)
 	{
         testAngle = getFanAngle(stepCount, j);
-		testError = min(0.1f*getSquaredError(workingPoint, testAngle, true),
-                        getSquaredError(workingPoint, testAngle, false));
+		testError = getSquaredError(workingPoint, testAngle, true);
 
 		if (j == 0 || testError < minError)
 		{
