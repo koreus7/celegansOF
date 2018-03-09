@@ -75,6 +75,9 @@ private:
     ofShader beamShader;
     ofFbo beamPreviewFBO;
 
+	void onKeyReleased(ofKeyEventArgs & keyArgs);
+
+    bool hideAll = false;
     bool showPoints = true;
 
     const static int HIDE_FAN = 0;
@@ -85,7 +88,5 @@ private:
 	unsigned closestVertexToSelectorIndex;
     
     AppState* appState;
-
-    float errorHistogramGetter(void *data, int index);
 };
 
