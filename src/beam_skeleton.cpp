@@ -149,14 +149,32 @@ void BeamSkeleton::step()
     centerAngleAtPoint[stepCount] = lastAngle;
     maxErrorAtPoint[stepCount] = 0;
 
+
 	for (int j = 0; j < totalAngleSteps; j++)
 	{
         testAngle = getFanAngle(stepCount, j);
-		testError = min(0.1f*getSquaredError(workingPoint, testAngle, true),
-                        getSquaredError(workingPoint, testAngle, false));
+
+        float invertError = getSquaredError(workingPoint, testAngle, true);
+        float nonInvertError = getSquaredError(workingPoint, testAngle, false);
+
+        bool invertWasChosenAtAngle = false;
+
+        if(invertError < nonInvertError*0.9f)
+        {
+            testError = invertError;
+            invertWasChosenAtAngle = true;
+        }
+        else
+        {
+            testError = nonInvertError;
+        }
+
+        float angleScale = powf( abs(j - totalAngleSteps/2.0f)/totalAngleSteps/2.0f, 4)*0.1f;
+        testError*= angleScale;
 
 		if (j == 0 || testError < minError)
 		{
+            invertedBeamWasChosenAtPoint[stepCount] = invertWasChosenAtAngle;
 			minError = testError;
 			nextAngle = testAngle;
 		}
@@ -168,6 +186,7 @@ void BeamSkeleton::step()
 
         setErrorAtPointAngle(stepCount, j, testError);
 	}
+
 
     minErrorAtPoint[stepCount] = minError;
 
@@ -222,6 +241,17 @@ void BeamSkeleton::draw(float x, float y)
                 }
             }
 
+        }
+
+        for(int i = 0; i < stepCount - 1; i++)
+        {
+            if(invertedBeamWasChosenAtPoint[i])
+            {
+                ofPoint p1 = polyLine[i];
+                ofPoint p2 = polyLine[i + 1];
+                ofSetColor(0,0,255);
+                ofDrawLine(p1, p2);
+            }
         }
 
         ofTranslate(-x, -y);
