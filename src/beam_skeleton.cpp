@@ -89,7 +89,8 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, bool i
 const float BeamSkeleton::getBeamPixel(float beamY, bool invertBeam)
 {
     float beamPixel = 0.5f * (1 + cosf(((float)PI*beamY) / (parameters.beamWidth*0.5f)));
-    return invertBeam? 1.0f - beamPixel : beamPixel;
+    //return invertBeam? 1.0f - beamPixel : beamPixel;
+    return beamPixel/2.0f;
 }
 
 void BeamSkeleton::fitImage(const ofImage& image)
