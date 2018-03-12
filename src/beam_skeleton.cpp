@@ -149,14 +149,47 @@ void BeamSkeleton::step()
     centerAngleAtPoint[stepCount] = lastAngle;
     maxErrorAtPoint[stepCount] = 0;
 
+
 	for (int j = 0; j < totalAngleSteps; j++)
 	{
         testAngle = getFanAngle(stepCount, j);
-		testError = min(0.1f*getSquaredError(workingPoint, testAngle, true),
-                        getSquaredError(workingPoint, testAngle, false));
+
+        float invertError = getSquaredError(workingPoint, testAngle, true);
+        float nonInvertError = getSquaredError(workingPoint, testAngle, false);
+
+        bool invertWasChosenAtAngle = false;
+
+
+        if(parameters.beamType == BeamParameters::BEAM_NON_INVERTED)
+        {
+            testError = nonInvertError;
+        }
+        else if (parameters.beamType == BeamParameters::BEAM_INVERTED)
+        {
+            testError = invertError;
+            invertWasChosenAtAngle = true;
+        }
+        else if(parameters.beamType == BeamParameters::BEAM_MIXED)
+        {
+            if(invertError*(parameters.mixedBeamChoiceBias + 1) < nonInvertError)
+            {
+                testError = invertError;
+                invertWasChosenAtAngle = true;
+            }
+            else
+            {
+                testError = nonInvertError;
+            }
+
+        }
+
+
+        float angleScale = powf( abs(j - totalAngleSteps/2.0f)/totalAngleSteps, 4);
+        testError+= angleScale*parameters.shallowAngleBias*100.0f;
 
 		if (j == 0 || testError < minError)
 		{
+            invertedBeamWasChosenAtPoint[stepCount] = invertWasChosenAtAngle;
 			minError = testError;
 			nextAngle = testAngle;
 		}
@@ -168,6 +201,7 @@ void BeamSkeleton::step()
 
         setErrorAtPointAngle(stepCount, j, testError);
 	}
+
 
     minErrorAtPoint[stepCount] = minError;
 
@@ -222,6 +256,17 @@ void BeamSkeleton::draw(float x, float y)
                 }
             }
 
+        }
+
+        for(int i = 0; i < stepCount - 1; i++)
+        {
+            if(invertedBeamWasChosenAtPoint[i])
+            {
+                ofPoint p1 = polyLine[i];
+                ofPoint p2 = polyLine[i + 1];
+                ofSetColor(0,0,255);
+                ofDrawLine(p1, p2);
+            }
         }
 
         ofTranslate(-x, -y);
@@ -287,6 +332,7 @@ void BeamSkeleton::injectGUI()
     ImGui::SliderFloat("Beam Width", &parameters.beamWidth, 1, MAX_BEAM_SIZE);
     ImGui::SliderFloat("Beam Length", &parameters.beamLength, 1, MAX_BEAM_SIZE);
     ImGui::DragFloat("Total Length", &parameters.totalLength, 1.0f, 1.0f,1000.0f,"%.3f");
+    ImGui::SliderFloat("Shallow Angle Bias", &parameters.shallowAngleBias, 0.0f, 100.0f, "%.3f");
     ImGui::SliderInt("Fine mesh scale", &parameters.fineMeshScale, 1, 5);
     ImGui::SliderFloat("InitialAngle", &parameters.initialAngle, 0.0f, 2.0f*(float)PI, "%.3f");
     ImGui::PopItemWidth();
@@ -295,6 +341,11 @@ void BeamSkeleton::injectGUI()
     {
         fitImage(*appState->focusedImage);
     }
+    ImGui::Text("Beam Type");
+    ImGui::RadioButton("Standard", &parameters.beamType, BeamParameters::BEAM_NON_INVERTED);
+    ImGui::RadioButton("Inverted", &parameters.beamType, BeamParameters::BEAM_INVERTED);
+    ImGui::RadioButton("Mixed", &parameters.beamType, BeamParameters::BEAM_MIXED);
+    ImGui::SliderFloat("Bias", &parameters.mixedBeamChoiceBias, -1.0f, 1.0f, "%.3f");
     ImGui::Spacing();
     ImGui::Text("Visualisation");
     ImGui::Checkbox("Show Points", &showPoints);

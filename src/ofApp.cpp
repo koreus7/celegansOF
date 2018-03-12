@@ -4,7 +4,7 @@
 #include "file_load.h"
 #include "time_utils.h"
 #include "git_utils.h"
-
+#include "ofxOpenCv.h"
 
 
 
@@ -104,6 +104,20 @@ void ofApp::draw() {
         if(ImGui::Button("Log", ImVec2(120,20)))
         {
             showLogWindow = true;
+        }
+
+        if(ImGui::Button("Equalize Hist", ImVec2(120,20)))
+        {
+            ofImage gry;
+            gry.clone(*state.focusedImage);
+            gry.setImageType(OF_IMAGE_GRAYSCALE);
+            ofPixels& pixels = gry.getPixels();
+            ofxCvGrayscaleImage mod;
+            mod.allocate(state.focusedImage->getWidth(), state.focusedImage->getHeight());
+            mod.setFromPixels(pixels);
+            mod.contrastStretch();
+            state.focusedImage->setImageType(OF_IMAGE_GRAYSCALE);
+            state.focusedImage->setFromPixels(mod.getPixels());
         }
 
 
@@ -216,22 +230,20 @@ void ofApp::commitExperiment()
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {
+void ofApp::keyPressed(int key)
+{
 
-	ofLogVerbose(__FUNCTION__) << key;
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key) {
-
-	ofLogVerbose(__FUNCTION__) << key;
+void ofApp::keyReleased(int key)
+{
 
 }
 
 
 void ofApp::mouseScrolled(float x, float y)
 {
-	ofLogVerbose(__FUNCTION__) << "x: " << x << " y: " << y;
 }
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y) {
