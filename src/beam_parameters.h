@@ -17,6 +17,8 @@ public:
     float totalLength = 1000.0f;
     float shallowAngleBias = 0.0f;
     float mixedBeamChoiceBias = 0.0f;
+    // TODO serialize this.
+    float lowVarianceBias = 0.0f;
     int fineMeshScale = 2;
     int beamType = BEAM_MIXED;
 
