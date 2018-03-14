@@ -34,10 +34,11 @@ public:
     PointSelector tailPoint;
 
 private:
-	const float getSquaredError(ofVec2f beamStart, float angle, bool invertBeam);
+	const float getSquaredError(ofVec2f beamStart, float angle, int angleStep, bool invertBeam);
 	const float getBeamPixel(float beamY, bool invertBeam);
 	const float getFanAngle(int pointIndex, int angleStep);
 
+    ofImage* originalImage;
 	ofImage* scaledImage;
     
     bool showProgress = true;
@@ -65,6 +66,7 @@ private:
     float maxErrorAtPoint[MAX_POINTS];
 	float minErrorAtPoint[MAX_POINTS];
 	bool  invertedBeamWasChosenAtPoint[MAX_POINTS];
+	ofImage* beamSlices[MAX_ANGLES];
 
 	float getErrorAtPointAngle(int point, int angleStep);
     void setErrorAtPointAngle(int point, int angleStep, float error);
@@ -89,5 +91,7 @@ private:
 	unsigned closestVertexToSelectorIndex;
     
     AppState* appState;
+
+    void populateBeamSlices();
 };
 

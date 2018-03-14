@@ -3,7 +3,6 @@
 
 BeamSkeleton::~BeamSkeleton()
 {
-	delete scaledImage;
     ofRemoveListener(ofEvents().keyReleased, this, &BeamSkeleton::onKeyReleased);
 }
 
@@ -36,13 +35,21 @@ void BeamSkeleton::setup(AppState* appState)
     skeletonPoint.setup("Skeleton Vertex");
 
     ofAddListener(ofEvents().keyReleased, this, &BeamSkeleton::onKeyReleased);
+
+    for(int i = 0; i < MAX_ANGLES; i++)
+    {
+        beamSlices[i] = new ofImage;
+        //beamSlices[i]->setUseTexture(true);
+        beamSlices[i]->allocate(MAX_BEAM_SIZE, MAX_BEAM_SIZE, OF_IMAGE_COLOR);
+    }
+
 }
 
-const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, bool invertBeam)
+const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, int angleStep, bool invertBeam)
 {
 
-	const int BEAM_RES_X = (int)floor(parameters.beamLength);
-	const int BEAM_RES_Y = (int)floor(parameters.beamWidth);
+	const int BEAM_RES_X = (int)floor(parameters.beamLength*parameters.fineMeshScale);
+	const int BEAM_RES_Y = (int)floor(parameters.beamWidth*parameters.fineMeshScale);
 
 	const int imageWidth = (int)scaledImage->getWidth();
 	const int imageHeight = (int)scaledImage->getHeight();
@@ -50,7 +57,6 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, bool i
 	const ofPixels& imagePixels = scaledImage->getPixels();
 
 	float errorSum = 0;
-
 
 	// Here x and y refer to the local frame of the beam.
 	// where the x axis lies along the length of the beam
@@ -71,10 +77,11 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, bool i
 			else
 			{
 				ofColor imageSample = imagePixels.getColor(imageX, imageY);
+
 				float beamSample = getBeamPixel(y, invertBeam);
 
 				// Assuming grayscale so G, B and A channels are redundant.
-				float error = beamSample - imageSample.r / 255.0f;
+				float error = beamSample - imageSample.r/255.0f;
 
 				errorSum += error * error;
 			}
@@ -86,6 +93,52 @@ const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, bool i
 
 }
 
+void BeamSkeleton::populateBeamSlices()
+{
+    for(int i = 0; i < totalAngleSteps; i++)
+    {
+
+        float angle = getFanAngle(closestVertexToSelectorIndex, i);
+
+        const int BEAM_RES_X = (int)floor(parameters.beamLength);
+        const int BEAM_RES_Y = (int)floor(parameters.beamWidth);
+
+        const int imageWidth = (int)scaledImage->getWidth();
+        const int imageHeight = (int)scaledImage->getHeight();
+
+        const ofPixels& imagePixels = originalImage->getPixels();
+
+        ofPoint beamStart = polyLine[closestVertexToSelectorIndex];
+
+        // Here x and y refer to the local frame of the beam.
+        // where the x axis lies along the length of the beam
+        for (int x = 0; x < BEAM_RES_X; x++)
+        {
+            for (int y = -BEAM_RES_Y/2; y < BEAM_RES_Y/2; y++)
+            {
+                float length = sqrtf(x*x + y*y);
+
+
+                int imageX = (int)floor(cosf(atan2f(y, x) + angle)*length + beamStart.x);
+                int imageY = (int)floor(-sinf(atan2f(y, x) + angle)*length + beamStart.y);
+
+                // If the pixel is out of bounds.
+                if (imageX < 0 || imageY < 0 || imageX >= imageWidth || imageY >= imageHeight)
+                {
+                }
+                else
+                {
+                    ofColor imageSample = imagePixels.getColor(imageX, imageY);
+                    beamSlices[i]->setColor(BEAM_RES_Y - y + BEAM_RES_Y/2, x, imageSample);
+                    beamSlices[i]->update();
+                }
+
+            }
+        }
+
+    }
+}
+
 const float BeamSkeleton::getBeamPixel(float beamY, bool invertBeam)
 {
     float beamPixel = 0.5f * (1 + cosf(((float)PI*beamY) / (parameters.beamWidth*0.5f)));
@@ -95,6 +148,8 @@ const float BeamSkeleton::getBeamPixel(float beamY, bool invertBeam)
 void BeamSkeleton::fitImage(const ofImage& image)
 {
 	delete scaledImage;
+    delete originalImage;
+    originalImage = new ofImage(image);
 	scaledImage = new ofImage(image);
 	scaledImage->resize((int)image.getWidth()*parameters.fineMeshScale, (int)image.getHeight()*parameters.fineMeshScale);
 
@@ -154,8 +209,8 @@ void BeamSkeleton::step()
 	{
         testAngle = getFanAngle(stepCount, j);
 
-        float invertError = getSquaredError(workingPoint, testAngle, true);
-        float nonInvertError = getSquaredError(workingPoint, testAngle, false);
+        float invertError = getSquaredError(workingPoint, testAngle, j, true);
+        float nonInvertError = getSquaredError(workingPoint, testAngle, j, false);
 
         bool invertWasChosenAtAngle = false;
 
@@ -218,6 +273,18 @@ void BeamSkeleton::draw(float x, float y)
 {
     if(!hideAll)
     {
+        for(int i = 0; i < totalAngleSteps; i++)
+        {
+
+            // crop the image from the mouse position to 100x100 pixels and draw it at 0,0
+            //img.drawSubsection(0, 0, 100, 100, mouseX, mouseY);
+
+            float width = floor(parameters.beamWidth);
+            float height = floor(parameters.beamLength);
+
+            beamSlices[i]->drawSubsection(i*width, 0, width, height, width, 0);
+        }
+
         ofTranslate(x, y);
         ofSetColor(255, 255, 255, 255);
         polyLine.draw();
@@ -350,16 +417,17 @@ void BeamSkeleton::injectGUI()
     ImGui::Text("Visualisation");
     ImGui::Checkbox("Show Points", &showPoints);
     ImGui::RadioButton("No Fan", &fanShowState, HIDE_FAN);
-    ImGui::RadioButton("Single Fan", &fanShowState, SHOW_SINGLE_FAN);
+    if(ImGui::RadioButton("Single Fan", &fanShowState, SHOW_SINGLE_FAN))
+    {
+        populateBeamSlices();
+    }
     ImGui::RadioButton("All Fans", &fanShowState, SHOW_ALL_FAN);
     ImGui::End();
 
     if(fanShowState == SHOW_SINGLE_FAN && totalAngleSteps != 0)
     {
         ImGui::SetNextWindowContentSize(ImVec2(320,220));
-        ImGui::Begin("Error Distribution");
-        ImGui::Text(to_string(closestVertexToSelectorIndex).c_str());
-
+        ImGui::Begin("Vertex Info");
         static HistogramGetterData histogramData;
         histogramData.offset = closestVertexToSelectorIndex*totalAngleSteps;
         histogramData.array = errorAtPointAngles;
@@ -370,7 +438,19 @@ void BeamSkeleton::injectGUI()
                              "Error Distribution",
                             FLT_MIN,
                             FLT_MAX,
-                            ImVec2(300,200));
+                            ImVec2(170,100));
+
+        if(ImGui::Button("Get Slices"))
+        {
+            populateBeamSlices();
+        }
+
+//        for(int i = 0; i < totalAngleSteps; i++)
+//        {
+//            int texId = beamSlices[i]->getTexture().texData.textureID;
+//            ofLogVerbose("Tex") << texId;
+//            ImGui::Image((void *)texId, ImVec2(MAX_BEAM_SIZE, MAX_BEAM_SIZE));//ImVec2(floor(parameters.beamWidth), floor(parameters.beamLength)));
+//        }
         ImGui::End();
     }
 
