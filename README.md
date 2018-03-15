@@ -6,4 +6,4 @@ It's my final year project for my Computer Science Degree at The University of Y
 
 It's built in C++ with openFrameworks 0.9.8
 
-![alt text](https://raw.githubusercontent.com/koreus7/celegansOF/master/manual-experiment-logs/images/slice_preview.png)
+![alt text](https://github.com/koreus7/celegansOF/blob/master/manual-experiment-logs/images/slice_preview.png)
