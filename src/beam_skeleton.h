@@ -34,7 +34,7 @@ public:
     PointSelector tailPoint;
 
 private:
-	const float getSquaredError(ofVec2f beamStart, float angle, int angleStep, bool invertBeam);
+	const float getSquaredError(ofVec2f beamStart, float angle, bool invertBeam);
 	const float getBeamPixel(float beamY, bool invertBeam);
 	const float getFanAngle(int pointIndex, int angleStep);
 
@@ -93,5 +93,21 @@ private:
     AppState* appState;
 
     void populateBeamSlices();
+
+    /// Iterate over the beam, sampling the image for each pixel in the beam rectangle.
+    /// \param beamStart Start position of the beam in image space.
+    /// \param angle Angle of the beam from the horizonal, anticlockwise.
+    /// \param beamScale Scale of the beam relative to the size in parameters
+    /// \param image Image to sample from
+    /// \param iteratorState State pointer that is passed to the doIteratorFunction
+    /// \param doIteration function that does the actual work each iteration.
+    /// \param outOfBoundsAction function that is called if a beam pixel is out of the image bounds.
+    const void iterateOverBeam(ofVec2f beamStart, float angle, float beamScale, ofImage* image, void * iteratorState,
+           void (BeamSkeleton::*doIteration) (ofColor, ofVec2f, ofVec2f, void *), void (*outOfBoundsAction)(void *) );
+
+
+    void squaredErrorIteration(ofColor imageSample, ofVec2f beamFrame, ofVec2f beamPosition, void *iteratorData);
+
+    void populateBeamSlicesIteration(ofColor imageSample, ofVec2f beamFrame, ofVec2f beamPosition, void *iteratorData);
 };
 

@@ -45,99 +45,123 @@ void BeamSkeleton::setup(AppState* appState)
 
 }
 
-const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, int angleStep, bool invertBeam)
+const void BeamSkeleton::iterateOverBeam(ofVec2f beamStart, float angle, float beamScale,
+                                         ofImage* image, void * iteratorState, void (BeamSkeleton::*doIteration) (ofColor, ofVec2f, ofVec2f, void *), void (*outOfBoundsAction)(void *) )
 {
+    const int BEAM_RES_X = (int)floor(parameters.beamLength*beamScale);
+    const int BEAM_RES_Y = (int)floor(parameters.beamWidth*beamScale);
 
-	const int BEAM_RES_X = (int)floor(parameters.beamLength*parameters.fineMeshScale);
-	const int BEAM_RES_Y = (int)floor(parameters.beamWidth*parameters.fineMeshScale);
+    const int imageWidth = (int)image->getWidth();
+    const int imageHeight = (int)image->getHeight();
 
-	const int imageWidth = (int)scaledImage->getWidth();
-	const int imageHeight = (int)scaledImage->getHeight();
+    const ofPixels& imagePixels = image->getPixels();
 
-	const ofPixels& imagePixels = scaledImage->getPixels();
 
-	float errorSum = 0;
+    // Here x and y refer to the local frame of the beam.
+    // where the x axis lies along the length of the beam
+    for (int x = 0; x < BEAM_RES_X; x++)
+    {
+        for (int y = -BEAM_RES_Y/2; y < BEAM_RES_Y/2; y++)
+        {
+            float length = sqrtf(x*x + y*y);
 
-	// Here x and y refer to the local frame of the beam.
-	// where the x axis lies along the length of the beam
-	for (int x = 0; x < BEAM_RES_X; x++)
-	{
-		for (int y = -BEAM_RES_Y/2; y < BEAM_RES_Y/2; y++)
-		{
-			float length = sqrtf(x*x + y*y);
+            int imageX = (int)floor(cosf(atan2f(y, x) + angle)*length + beamStart.x);
+            int imageY = (int)floor(-sinf(atan2f(y, x) + angle)*length + beamStart.y);
 
-			int imageX = (int)floor(cosf(atan2f(y, x) + angle)*length + beamStart.x);
-			int imageY = (int)floor(-sinf(atan2f(y, x) + angle)*length + beamStart.y);
+            // If the pixel is out of bounds.
+            if (imageX < 0 || imageY < 0 || imageX >= imageWidth || imageY >= imageHeight)
+            {
+                outOfBoundsAction(iteratorState);
+            }
+            else
+            {
+                ofColor imageSample = imagePixels.getColor(imageX, imageY);
 
-			// If the pixel is out of bounds.
-			if (imageX < 0 || imageY < 0 || imageX >= imageWidth || imageY >= imageHeight) 
-			{
-				errorSum += 2;
-			}
-			else
-			{
-				ofColor imageSample = imagePixels.getColor(imageX, imageY);
+                (this->*doIteration)(imageSample, ofVec2f(BEAM_RES_X, BEAM_RES_Y), ofVec2f(x, y), iteratorState);
+            }
 
-				float beamSample = getBeamPixel(y, invertBeam);
+        }
+    }
+}
 
-				// Assuming grayscale so G, B and A channels are redundant.
-				float error = beamSample - imageSample.r/255.0f;
 
-				errorSum += error * error;
-			}
+//
+// Squared Error Iteration
+//
+struct SquaredErrorIteratorData
+{
+    float errorSum;
+    bool invertBeam;
+};
 
-		}
-	}
 
-	return errorSum;
+void BeamSkeleton::squaredErrorIteration(ofColor imageSample, ofVec2f beamFrame, ofVec2f beamPosition, void * iteratorData)
+{
+    auto squaredErrorIterator = (SquaredErrorIteratorData *)iteratorData;
+
+    float beamSample = getBeamPixel(beamPosition.y, squaredErrorIterator->invertBeam);
+
+    // Assuming grayscale so G, B and A channels are redundant.
+    float error = beamSample - imageSample.r/255.0f;
+
+    squaredErrorIterator->errorSum += error * error;
 
 }
+
+const float BeamSkeleton::getSquaredError(ofVec2f beamStart, float angle, bool invertBeam)
+{
+    SquaredErrorIteratorData iteratorData { 0, invertBeam };
+
+    iterateOverBeam(beamStart, angle, parameters.fineMeshScale, scaledImage,
+                    &iteratorData, &BeamSkeleton::squaredErrorIteration, [](void * iteratorData){
+
+        auto squaredErrorIterator = (SquaredErrorIteratorData *)iteratorData;
+        squaredErrorIterator->errorSum +=2;
+
+    });
+
+    return iteratorData.errorSum;
+}
+
+//
+//
+//
+
+
+//
+// Beam Slices Iteration
+//
+struct PopulateBeamSlicesIteratorData
+{
+    int sliceNumber;
+};
+
+
+void BeamSkeleton::populateBeamSlicesIteration(ofColor imageSample, ofVec2f beamFrame, ofVec2f beamPosition, void * iteratorData)
+{
+    int sliceNumber = ((PopulateBeamSlicesIteratorData*)iteratorData)->sliceNumber;
+    beamSlices[sliceNumber]->setColor(beamFrame.y - beamPosition.y + beamFrame.y/2, beamPosition.x, imageSample);
+    beamSlices[sliceNumber]->update();
+}
+
+
 
 void BeamSkeleton::populateBeamSlices()
 {
+
+    PopulateBeamSlicesIteratorData iteratorData { 0 };
+
     for(int i = 0; i < totalAngleSteps; i++)
     {
-
-        float angle = getFanAngle(closestVertexToSelectorIndex, i);
-
-        const int BEAM_RES_X = (int)floor(parameters.beamLength);
-        const int BEAM_RES_Y = (int)floor(parameters.beamWidth);
-
-        const int imageWidth = (int)scaledImage->getWidth();
-        const int imageHeight = (int)scaledImage->getHeight();
-
-        const ofPixels& imagePixels = originalImage->getPixels();
-
-        ofPoint beamStart = polyLine[closestVertexToSelectorIndex];
-
-        // Here x and y refer to the local frame of the beam.
-        // where the x axis lies along the length of the beam
-        for (int x = 0; x < BEAM_RES_X; x++)
-        {
-            for (int y = -BEAM_RES_Y/2; y < BEAM_RES_Y/2; y++)
-            {
-                float length = sqrtf(x*x + y*y);
-
-
-                int imageX = (int)floor(cosf(atan2f(y, x) + angle)*length + beamStart.x);
-                int imageY = (int)floor(-sinf(atan2f(y, x) + angle)*length + beamStart.y);
-
-                // If the pixel is out of bounds.
-                if (imageX < 0 || imageY < 0 || imageX >= imageWidth || imageY >= imageHeight)
-                {
-                }
-                else
-                {
-                    ofColor imageSample = imagePixels.getColor(imageX, imageY);
-                    beamSlices[i]->setColor(BEAM_RES_Y - y + BEAM_RES_Y/2, x, imageSample);
-                    beamSlices[i]->update();
-                }
-
-            }
-        }
-
+        iteratorData.sliceNumber = i;
+        iterateOverBeam(polyLine[closestVertexToSelectorIndex], getFanAngle(closestVertexToSelectorIndex, i), 1.0f,
+                        originalImage, &iteratorData, &BeamSkeleton::populateBeamSlicesIteration, [](void * iteratorData){});
     }
+
 }
+//
+//
+//
 
 const float BeamSkeleton::getBeamPixel(float beamY, bool invertBeam)
 {
@@ -209,8 +233,8 @@ void BeamSkeleton::step()
 	{
         testAngle = getFanAngle(stepCount, j);
 
-        float invertError = getSquaredError(workingPoint, testAngle, j, true);
-        float nonInvertError = getSquaredError(workingPoint, testAngle, j, false);
+        float invertError = getSquaredError(workingPoint, testAngle, true);
+        float nonInvertError = getSquaredError(workingPoint, testAngle, false);
 
         bool invertWasChosenAtAngle = false;
 
@@ -275,9 +299,6 @@ void BeamSkeleton::draw(float x, float y)
     {
         for(int i = 0; i < totalAngleSteps; i++)
         {
-
-            // crop the image from the mouse position to 100x100 pixels and draw it at 0,0
-            //img.drawSubsection(0, 0, 100, 100, mouseX, mouseY);
 
             float width = floor(parameters.beamWidth);
             float height = floor(parameters.beamLength);
@@ -444,13 +465,6 @@ void BeamSkeleton::injectGUI()
         {
             populateBeamSlices();
         }
-
-//        for(int i = 0; i < totalAngleSteps; i++)
-//        {
-//            int texId = beamSlices[i]->getTexture().texData.textureID;
-//            ofLogVerbose("Tex") << texId;
-//            ImGui::Image((void *)texId, ImVec2(MAX_BEAM_SIZE, MAX_BEAM_SIZE));//ImVec2(floor(parameters.beamWidth), floor(parameters.beamLength)));
-//        }
         ImGui::End();
     }
 
