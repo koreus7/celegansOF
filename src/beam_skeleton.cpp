@@ -295,6 +295,13 @@ void BeamSkeleton::step()
 
 void BeamSkeleton::draw(float x, float y)
 {
+
+    if(this->originalImage)
+    {
+        ofSetColor(255,255,255);
+        this->originalImage->draw(x,y);
+    }
+
     if(!hideAll)
     {
         for(int i = 0; i < totalAngleSteps; i++)
@@ -363,6 +370,7 @@ void BeamSkeleton::draw(float x, float y)
         tailPoint.draw();
 
     }
+
 }
 
 void BeamSkeleton::update()
@@ -420,6 +428,8 @@ void BeamSkeleton::injectGUI()
     ImGui::SliderFloat("Beam Width", &parameters.beamWidth, 1, MAX_BEAM_SIZE);
     ImGui::SliderFloat("Beam Length", &parameters.beamLength, 1, MAX_BEAM_SIZE);
     ImGui::DragFloat("Total Length", &parameters.totalLength, 1.0f, 1.0f,1000.0f,"%.3f");
+    ImGui::DragFloat("Sigma", &parameters.sigma, 0.01f, 0.1f,1.0f,"%.3f");
+    ImGui::DragFloat("Stretch", &parameters.stretch, 0.01f, 1.0f,5.0f,"%.3f");
     ImGui::SliderFloat("Shallow Angle Bias", &parameters.shallowAngleBias, 0.0f, 100.0f, "%.3f");
     ImGui::SliderInt("Fine mesh scale", &parameters.fineMeshScale, 1, 5);
     ImGui::SliderFloat("InitialAngle", &parameters.initialAngle, 0.0f, 2.0f*(float)PI, "%.3f");
@@ -429,6 +439,11 @@ void BeamSkeleton::injectGUI()
     {
         fitImage(*appState->focusedImage);
     }
+    if(ImGui::Button("Tweak With Derivatives", ImVec2(100,20))) {
+
+        tweaker.tweak(this->parameters, this->originalImage, this->polyLine);
+    };
+
     ImGui::Text("Beam Type");
     ImGui::RadioButton("Standard", &parameters.beamType, BeamParameters::BEAM_NON_INVERTED);
     ImGui::RadioButton("Inverted", &parameters.beamType, BeamParameters::BEAM_INVERTED);
@@ -443,6 +458,7 @@ void BeamSkeleton::injectGUI()
         populateBeamSlices();
     }
     ImGui::RadioButton("All Fans", &fanShowState, SHOW_ALL_FAN);
+
     ImGui::End();
 
     if(fanShowState == SHOW_SINGLE_FAN && totalAngleSteps != 0)

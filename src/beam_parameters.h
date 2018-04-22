@@ -13,6 +13,8 @@ public:
 
     float initialAngle = 0.0f;
     float beamWidth = 30.0f;
+    float sigma = 0.4f;
+    float stretch = 1.5f;
     float beamLength = 60.0f;
     float totalLength = 1000.0f;
     float shallowAngleBias = 0.0f;

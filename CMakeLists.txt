@@ -62,6 +62,7 @@ set( OFX_ADDONS_ACTIVE
                  ofxOpenCv
                  ofxJSON
                  ofxImGui
+                 #ofxCv
         #        ofxSvg
         #        ofxEmscripten (untested)
                 )

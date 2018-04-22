@@ -7,6 +7,7 @@
 #include "beam_parameters.h"
 #include "serializable.h"
 #include "point_selector.h"
+#include "beam_tweaker.h"
 
 class BeamSkeleton : public ISerializable
 {
@@ -91,6 +92,8 @@ private:
 	unsigned closestVertexToSelectorIndex;
     
     AppState* appState;
+
+    BeamTweaker tweaker;
 
     void populateBeamSlices();
 
