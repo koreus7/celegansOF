@@ -177,13 +177,17 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         vector <float> measured;
         vector <ofVec2f> samplePoints;
 
-        const int numSamples = (int)floor(parameters.beamWidth*2.0f);
+
+        float paddingLength = parameters.beamWidth*0.25f;
+        float sampleLength = parameters.beamWidth*2.0f + paddingLength;
+        const int numSamples = (int)floor(sampleLength);
+        const int padding =  (int)floor(paddingLength);
 
 
         std::cout << "measured  {";
         for(int j = 0; j < numSamples; j++)
         {
-            ofVec2f samplePoint = currentLinePoint + ofVec2f(diff.y, -diff.x)*parameters.beamWidth
+            ofVec2f samplePoint = currentLinePoint + ofVec2f(diff.y, -diff.x)*sampleLength
                                   + ofVec2f(-diff.y, diff.x)*j;
 
             samplePoints.push_back(samplePoint);
@@ -218,6 +222,15 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         gaussianFilter(21, 0.5, filter);
         vector<float> smoothed = conv_same(measured,  filter);
 
+
+        for(int j = 0; j < padding/2; j++) {
+
+            smoothed.pop_back();
+            smoothed.erase(smoothed.begin());
+
+        }
+
+
         vector <float> filter1;
         gaussianFilterPrime(25, sigma, filter1);
         vector<float> firstDerivatives = conv_same(smoothed, filter1);
@@ -233,13 +246,11 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         std::cout << "}" << endl;
 
 
-
-
         float maxsmooth = max_val(smoothed);
         std::cout << "smoothed {";
         for(int j = 0; j < smoothed.size(); j++) {
 
-            ofVec2f point = samplePoints[j];
+            ofVec2f point = samplePoints[j + padding/2];
 
             std::cout << smoothed[j] << " , ";
 
@@ -252,7 +263,7 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         float maxfirstd = max_val(firstDerivatives);
         for(int j = 0; j < firstDerivatives.size(); j++) {
 
-            ofVec2f point = samplePoints[j];
+            ofVec2f point = samplePoints[j + padding/2];
 
             firstDerivatives[j] = fabs(firstDerivatives[j]);
 
@@ -267,7 +278,7 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         std::cout << "secondd {";
         for(int j = 0; j < secondDerivatives.size(); j++) {
 
-            ofVec2f point = samplePoints[j];
+            ofVec2f point = samplePoints[j + padding/2];
 
             //secondDerivatives[j] = fabs(secondDerivatives[j]);
 
@@ -281,12 +292,12 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         std::cout << endl << endl;
 
 
-        ofVec2f adjusted =  samplePoints[max_index(secondDerivatives)];
+        ofVec2f adjusted =  samplePoints[max_index(secondDerivatives) + padding/2];
         originalImage->setColor((int)floor(adjusted.x), (int)floor(adjusted.y), ofColor(255,0,255));
 
 
         int max1stIndex = max_index(firstDerivatives);
-        ofVec2f max1st =  samplePoints[max1stIndex];
+        ofVec2f max1st =  samplePoints[max1stIndex + padding/2];
 
         // Non maximum suppression.
         for(int j = 0; j < (int)floor(parameters.beamWidth*0.6f); j++) {
