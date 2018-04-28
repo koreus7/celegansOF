@@ -1,6 +1,7 @@
 #include "beam_tweaker.h"
 #define SQRT_2_PI 2.50662827463
 #define SQRT_3 1.7320508076
+#define ERROR_MARGIN 0.00001
 
 template<typename T>
 std::vector<T>
@@ -50,14 +51,18 @@ conv_same(std::vector<T> const &f, std::vector<T> const &g) {
 
     for(long i = 0; i < requiredPadding/2; i++) {
 
-        result.push_back(startPadding);
+        result.push_back(endPadding);
         //TODO deque instead.
-        result.insert(result.begin(),endPadding);
+        result.insert(result.begin(),startPadding);
 
     }
 
     return result;
 
+}
+
+float inverseGauss(float y, float sigma) {
+    return (float)sqrt(-2*pow(sigma,2)*log(2*SQRT_2_PI*sigma*y));
 }
 
 float gauss(float x, float sigma) {
@@ -83,10 +88,11 @@ float gausspp(float x, float sigma) {
 
 void gaussianFilter(int size, float sigma, std::vector<float>& out) {
 
+    float max = inverseGauss(ERROR_MARGIN/2, sigma);
 
     for(int j = 0; j < size; j++)
     {
-        float x =  2  * ( j - floor(size/2.0f) ) / ( 0.5f*(size - 1) );
+        float x =  max  * ( j - floor(size/2.0f) ) / ( 0.5f*(size - 1) );
 
         float filterValue = gauss(x, sigma);
 
@@ -98,11 +104,11 @@ void gaussianFilter(int size, float sigma, std::vector<float>& out) {
 
 void gaussianFilterPrime(int size, float sigma, std::vector<float>& out) {
 
-    const float scale = sigma*SQRT_3;
+    float max = inverseGauss(ERROR_MARGIN/2, sigma);
 
     for(int j = 0; j < size; j++)
     {
-        float x = 2 * scale *  ( j - floor(size/2.0f) ) / ( 0.5f*(size - 1) );
+        float x = max  *  ( j - floor(size/2.0f) ) / ( 0.5f*(size - 1) );
 
         float filterValue = gaussp(x, sigma);
 
@@ -114,11 +120,11 @@ void gaussianFilterPrime(int size, float sigma, std::vector<float>& out) {
 
 void gaussianFilterDoublePrime(int size, float sigma, std::vector<float>& out) {
 
-    const float scale = sigma*SQRT_3;
+    float max = inverseGauss(ERROR_MARGIN/2, sigma);
 
     for(int j = 0; j < size; j++)
     {
-        float x = 2 * scale * ( j - floor(size/2.0f) ) / ( 0.5f*(size - 1) );
+        float x = max  * ( j - floor(size/2.0f) ) / ( 0.5f*(size - 1) );
 
         float filterValue = gausspp(x, sigma);
 
@@ -162,10 +168,79 @@ bool compareByIndex(const PotentialEdge &a, const PotentialEdge &b)
 }
 
 
+void setPixel(ofVec2f pos, ofColor color, ofImage* image) {
+
+    if(pos.x >= 0 && pos.x < image->getWidth() && pos.y >= 0 && pos.y < image->getHeight()) {
+
+        image->setColor((int)floor(pos.x), (int)floor(pos.y), color);
+
+    }
+}
+
+float taperFunction(float percentageAlongTaper) {
+
+    return -0.103189 + (float) 2.15538*sqrt(percentageAlongTaper) - 1.0385*percentageAlongTaper;
+
+}
+
+void safeZeroAtf(vector<float>& vec, long i) {
+
+    if(i >= 0 && i < vec.size()) {
+
+        vec[i] = 0.0f;
+
+    } else {
+
+        ofLog() << "Bad Access";
+    }
+
+}
+
+
 const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *originalImage, ofPolyline &fittedLine)
 {
+    cout.precision(30);
+    cout.setf(ios_base::fixed);
+
+
+    vector <ofVec2f> allAdjusted;
+
+
+    float taperPercentage = 0.175676;
+    float totalLength =  parameters.totalLength;
+    float taperLength = totalLength*taperPercentage;
+
+    float singleDistance =  0.5f*parameters.beamLength;
+
+
     for(int i = 1; i < fittedLine.size(); i++)
     {
+
+        float distanceAlongWorm = i*singleDistance;
+
+        float workingWidth = parameters.beamWidth;
+
+        ofLog() << "distance" << distanceAlongWorm;
+
+        if(distanceAlongWorm < taperLength) {
+
+            float percentageAlongTaper = (distanceAlongWorm)/taperLength;
+
+            ofLog() << percentageAlongTaper;
+
+            workingWidth =  parameters.beamWidth*taperFunction(percentageAlongTaper);
+
+        } else if(distanceAlongWorm > totalLength -  taperLength) {
+
+            float percentageAlongTaper = (totalLength -distanceAlongWorm)/taperLength;
+
+            ofLog() << percentageAlongTaper;
+
+            workingWidth = parameters.beamWidth*taperFunction(percentageAlongTaper);
+
+        }
+
+
         ofPoint currentLinePoint = fittedLine[i];
         ofPoint previous = fittedLine[i - 1];
 
@@ -180,7 +255,7 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         const int numSamples = (int)floor(parameters.beamWidth*2.0f);
 
 
-        std::cout << "measured  {";
+
         for(int j = 0; j < numSamples; j++)
         {
             ofVec2f samplePoint = currentLinePoint + ofVec2f(diff.y, -diff.x)*parameters.beamWidth
@@ -204,9 +279,17 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
 
         }
 
-        std::cout << "}" << endl;
+        for(int j = 0; j < numSamples; j++) {
 
+            if(j > floor((parameters.beamWidth*2.0 - workingWidth)/2) && j < floor(workingWidth + (parameters.beamWidth*2.0 - workingWidth)/2)) {
 
+                setPixel(samplePoints[j], ofColor(255,0,0), originalImage);
+
+            }
+
+        }
+
+        std::cout << std::endl;
 
         vector <float> filter;
 
@@ -215,28 +298,27 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         //const int filterSize = (int)floor(parameters.beamWidth);
 
         // Smoothing and lowpass
-        gaussianFilter(21, 0.5, filter);
+        gaussianFilter(17, 0.25, filter);
         vector<float> smoothed = conv_same(measured,  filter);
 
         vector <float> filter1;
-        gaussianFilterPrime(25, sigma, filter1);
+        gaussianFilterPrime(17, sigma, filter1);
         vector<float> firstDerivatives = conv_same(smoothed, filter1);
 
         vector <float> filter2;
-        gaussianFilterDoublePrime(25, sigma, filter2);
+        gaussianFilterDoublePrime(17, sigma, filter2);
         vector<float> secondDerivatives = conv_same(smoothed, filter2);
 
-        std::cout << "d2filter {";
-        for(long i = 0; i < filter2.size(); i++) {
-            std::cout << filter2[i]*10000 << " , ";
-        }
-        std::cout << "}" << endl;
+
+//        for(long i = 0; i < filter2.size(); i++) {
+//            std::cout << filter2[i]*10000 << " , ";
+//        }
+//        std::cout << endl;
 
 
 
 
         float maxsmooth = max_val(smoothed);
-        std::cout << "smoothed {";
         for(int j = 0; j < smoothed.size(); j++) {
 
             ofVec2f point = samplePoints[j];
@@ -246,9 +328,8 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
             //originalImage->setColor((int)floor(point.x), (int)floor(point.y), ofColor(255.0*smoothed[j]/maxsmooth,0,0));
 
         }
-        std::cout << "}" << endl;
+        std::cout << endl;
 
-        std::cout << "firstd {";
         float maxfirstd = max_val(firstDerivatives);
         for(int j = 0; j < firstDerivatives.size(); j++) {
 
@@ -258,27 +339,30 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
 
             std::cout << firstDerivatives[j] << " , ";
 
-            originalImage->setColor((int)floor(point.x), (int)floor(point.y), ofColor(255.0f*firstDerivatives[j]/maxfirstd,0,0));
+
+            //setPixel(point, ofColor(255.0f*firstDerivatives[j]/maxfirstd,0,0), originalImage);
 
         }
 
-        std::cout << "}" << endl;
-        float maxsecondd = max_val(secondDerivatives);
-        std::cout << "secondd {";
-        for(int j = 0; j < secondDerivatives.size(); j++) {
+        std::cout << endl;
 
-            ofVec2f point = samplePoints[j];
-
-            //secondDerivatives[j] = fabs(secondDerivatives[j]);
-
-            std::cout << 1000.0*secondDerivatives[j] << " , ";
-
-            originalImage->setColor((int)floor(point.x), (int)floor(point.y), ofColor(0,255.0f*secondDerivatives[j]/maxsecondd,0));
-
-        }
-        std::cout << "}" << endl;
-
-        std::cout << endl << endl;
+//        float maxsecondd = max_val(secondDerivatives);
+//        for(int j = 0; j < secondDerivatives.size(); j++) {
+//
+//            ofVec2f point = samplePoints[j];
+//
+//            //secondDerivatives[j] = fabs(secondDerivatives[j]);
+//
+//            std::cout << 1000.0*secondDerivatives[j] << " , ";
+//
+//            float x = point.x;
+//            float y = point.y;
+//
+//            //setPixel(point, ofColor(0, 255.0f * secondDerivatives[j] / maxsecondd, 0), originalImage);
+//
+//        }
+//
+//        std::cout << endl;
 
 
         ofVec2f adjusted =  samplePoints[max_index(secondDerivatives)];
@@ -288,36 +372,79 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         int max1stIndex = max_index(firstDerivatives);
         ofVec2f max1st =  samplePoints[max1stIndex];
 
-        // Non maximum suppression.
-        for(int j = 0; j < (int)floor(parameters.beamWidth*0.6f); j++) {
 
-            if(max1stIndex + j < firstDerivatives.size()) {
+        if(max1stIndex < numSamples/2) {
 
-                firstDerivatives[max1stIndex + j] = 0.0f;
+            for(int j = 0; j < (int)floor(workingWidth*0.8f); j++) {
+
+                safeZeroAtf(firstDerivatives,max1stIndex + j);
 
             }
 
-            if(max1stIndex - j >= 0) {
+            for(int j = max1stIndex; j >= 0; j--) {
 
-                firstDerivatives[max1stIndex - j] = 0.0f;
+                safeZeroAtf(firstDerivatives, j);
 
+            }
+
+            int expectedLocation = max1stIndex + (int)floor(workingWidth*1.2f);
+            for(int j = expectedLocation; j < firstDerivatives.size(); j++) {
+
+                safeZeroAtf(firstDerivatives,j);
+            }
+
+        } else {
+
+            for(int j = 0; j < (int)floor(workingWidth*0.8f); j++) {
+
+                safeZeroAtf(firstDerivatives,max1stIndex - j);
+
+            }
+
+
+            for(int j = max1stIndex; j < firstDerivatives.size(); j++) {
+
+                safeZeroAtf(firstDerivatives, j);
+
+            }
+
+            int expectedLocation = max1stIndex - (int)floor(workingWidth*1.2f);
+            for(int j = expectedLocation; j >= 0; j--){
+
+                safeZeroAtf(firstDerivatives, j);
             }
 
         }
 
 
+        for(int j = 0; j < firstDerivatives.size(); j++) {
+            std::cout << firstDerivatives[j] << " , ";
+        }
+        std::cout << endl;
+
+
         ofVec2f max2nd =  samplePoints[max_index(firstDerivatives)];
 
-        originalImage->setColor((int)floor(max1st.x), (int)floor(max1st.y), ofColor(255,255,0));
-        originalImage->setColor((int)floor(max2nd.x), (int)floor(max2nd.y), ofColor(255,255,0));
+
+        setPixel(max1st,  ofColor(255,255,0), originalImage);
+        setPixel(max2nd,  ofColor(255,255,0), originalImage);
+
+
 
 
         ofVec2f direction =  max1st - max2nd;
         float len = direction.length();
         direction.normalize();
 
-        fittedLine[i] = max2nd + direction*len*0.5;
 
+        allAdjusted.push_back(max2nd + direction*len*0.5);
+
+
+    }
+
+    for(long i = 0; i < allAdjusted.size(); i++) {
+
+        fittedLine[i + 1] = ofVec2f(allAdjusted[i]);
 
     }
 

@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "beam_parameters.h"
 #include <algorithm>
+#include <iostream>
 
 class BeamTweaker {
 public:
