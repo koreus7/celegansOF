@@ -31,7 +31,7 @@ class ofApp : public ofBaseApp{
 
         void loadImage();
         void loadExperiment();
-        void commitExperiment();
+        void commitExperiment(bool commitToBranch);
 
 		ofxImGui::Gui gui;
 		
@@ -58,6 +58,10 @@ class ofApp : public ofBaseApp{
         ExperimentMetadata experimentMetaData;
 
         bool showLogWindow = false;
+
+	    bool showSeriesWindow = false;
+		const int SERIES_FILE_NAME_BUFFER_SIZE = 512;
+		char * seriesFileNameBuffer;
 
 		const static int PREVIEW_SIZE = 128;
 };

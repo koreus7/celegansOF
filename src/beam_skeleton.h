@@ -16,6 +16,7 @@ public:
 	void fitImage(const ofImage& image);
 	bool isFitDone();
 	void step();
+	void tweak();
     void setup(AppState* appConfig);
     void update();
     void draw(float x, float y);

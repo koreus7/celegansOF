@@ -421,6 +421,12 @@ float histogramGetter(void *data, int index)
     return d->array[d->offset + index];
 }
 
+void BeamSkeleton::tweak()
+{
+
+    tweaker.tweak(this->parameters, this->originalImage, this->polyLine);
+}
+
 void BeamSkeleton::injectGUI()
 {
     ImGui::Begin("Beam Fit");
@@ -440,9 +446,9 @@ void BeamSkeleton::injectGUI()
     {
         fitImage(*appState->focusedImage);
     }
-    if(ImGui::Button("Tweak With Derivatives", ImVec2(100,20))) {
-
-        tweaker.tweak(this->parameters, this->originalImage, this->polyLine);
+    if(ImGui::Button("Tweak With Derivatives", ImVec2(100,20)))
+    {
+        tweak();
     };
 
     ImGui::Text("Beam Type");

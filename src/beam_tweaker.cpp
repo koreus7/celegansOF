@@ -3,22 +3,6 @@
 #define SQRT_3 1.7320508076
 #define ERROR_MARGIN 0.00001
 
-template<typename T>
-std::vector<T>
-conv(std::vector<T> const &f, std::vector<T> const &g) {
-    int const nf = f.size();
-    int const ng = g.size();
-    int const n  = nf + ng - 1;
-    std::vector<T> out(n, T());
-    for(auto i(0); i < n; ++i) {
-        int const jmn = (i >= ng - 1)? i - (ng - 1) : 0;
-        int const jmx = (i <  nf - 1)? i            : nf - 1;
-        for(auto j(jmn); j <= jmx; ++j) {
-            out[i] += (f[j] * g[i - j]);
-        }
-    }
-    return out;
-}
 
 template<typename T>
 std::vector<T>
@@ -310,14 +294,6 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         vector<float> secondDerivatives = conv_same(smoothed, filter2);
 
 
-//        for(long i = 0; i < filter2.size(); i++) {
-//            std::cout << filter2[i]*10000 << " , ";
-//        }
-//        std::cout << endl;
-
-
-
-
         float maxsmooth = max_val(smoothed);
         for(int j = 0; j < smoothed.size(); j++) {
 
@@ -345,24 +321,6 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
         }
 
         std::cout << endl;
-
-//        float maxsecondd = max_val(secondDerivatives);
-//        for(int j = 0; j < secondDerivatives.size(); j++) {
-//
-//            ofVec2f point = samplePoints[j];
-//
-//            //secondDerivatives[j] = fabs(secondDerivatives[j]);
-//
-//            std::cout << 1000.0*secondDerivatives[j] << " , ";
-//
-//            float x = point.x;
-//            float y = point.y;
-//
-//            //setPixel(point, ofColor(0, 255.0f * secondDerivatives[j] / maxsecondd, 0), originalImage);
-//
-//        }
-//
-//        std::cout << endl;
 
 
         ofVec2f adjusted =  samplePoints[max_index(secondDerivatives)];
@@ -428,7 +386,6 @@ const void BeamTweaker::tweak(const BeamParameters &parameters, ofImage *origina
 
         setPixel(max1st,  ofColor(255,255,0), originalImage);
         setPixel(max2nd,  ofColor(255,255,0), originalImage);
-
 
 
 

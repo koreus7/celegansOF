@@ -42,6 +42,9 @@ void ofApp::setup()
     experimentData.registerImage(&state.focusedImage, "focused_image");
     experimentData.registerImage(&screenCapture, "result");
 
+    seriesFileNameBuffer = new char[SERIES_FILE_NAME_BUFFER_SIZE];
+    memset(&seriesFileNameBuffer[0], 0, SERIES_FILE_NAME_BUFFER_SIZE);
+
 }
 
 //--------------------------------------------------------------
@@ -106,7 +109,12 @@ void ofApp::draw() {
             showLogWindow = true;
         }
 
-        if(ImGui::Button("Equalize Hist", ImVec2(120,20)))
+        if(ImGui::Button("Run Series", ImVec2(120,20)))
+        {
+            showSeriesWindow = true;
+        }
+
+        if(ImGui::Button("Contrast Stretch", ImVec2(120,20)))
         {
             ofImage gry;
             gry.clone(*state.focusedImage);
@@ -128,7 +136,52 @@ void ofApp::draw() {
             ImGui::InputText("Name", experimentMetaData.nameBuffer, experimentMetaData.NAME_BUFFER_SIZE);
             if(ImGui::Button("Commit", ImVec2(100,20)))
             {
-                commitExperiment();
+                commitExperiment(true);
+            }
+            if(ImGui::Button("Write (no git)", ImVec2(100,20)))
+            {
+                commitExperiment(false);
+            }
+            ImGui::End();
+
+        }
+
+        if(showSeriesWindow) {
+
+            ImGui::Begin("Run Series of Experiments");
+            ImGui::InputText("Experiment File", seriesFileNameBuffer, SERIES_FILE_NAME_BUFFER_SIZE);
+            if(ImGui::Button("Go", ImVec2(100, 20)))
+            {
+                //experimentData.deserializeFromFile(seriesFileNameBuffer);
+
+                for(int i = 0; i < 10; i++)
+                {
+                    previewImages[0] = loadFromPath("One_" + std::to_string(i) + ".jpg");
+
+                    state.focusedImage = &previewImages[0];
+
+                    float actualWidth = beamSkeleton.parameters.beamWidth;
+
+                    beamSkeleton.parameters.beamWidth*=2;
+
+                    beamSkeleton.fitImage(*state.focusedImage);
+
+                    while(!beamSkeleton.isFitDone()) {
+
+                        beamSkeleton.step();
+
+                    }
+
+                    beamSkeleton.parameters.beamWidth = actualWidth;
+                    beamSkeleton.tweak();
+
+                    std::string name = "exp1_" + std::to_string(i);
+                    strcpy(experimentMetaData.nameBuffer, name.c_str());
+
+                    commitExperiment(false);
+
+                }
+
             }
             ImGui::End();
 
@@ -173,7 +226,7 @@ void ofApp::loadImage()
 
 void ofApp::loadExperiment()
 {
-    ofFileDialogResult openFileResult = ofSystemLoadDialog("Select Experiment JSON file");
+    ofFileDialogResult openFileResult = ofSystemLoadDialog("Select Experiment JSON file.");
 
     if (openFileResult.bSuccess)
     {
@@ -182,7 +235,7 @@ void ofApp::loadExperiment()
     }
 }
 
-void ofApp::commitExperiment()
+void ofApp::commitExperiment(bool commitToBranch)
 {
     delete screenCapture;
     screenCapture = new ofImage();
@@ -208,23 +261,29 @@ void ofApp::commitExperiment()
         strcpy(experimentMetaData.nameBuffer, experimentName.c_str());
     }
 
-    // If we have no current changes then
-    // we will end up popping whatever was on the stash
-    // so make sure we clear it first.
-    GitUtils::clearStash();
-    GitUtils::stashCurrentChanges();
-    GitUtils::checkoutNewBranch(experimentName);
-    GitUtils::applyStashedChanges();
+    if(commitToBranch)
+    {
+        // If we have no current changes then
+        // we will end up popping whatever was on the stash
+        // so make sure we clear it first.
+        GitUtils::clearStash();
+        GitUtils::stashCurrentChanges();
+        GitUtils::checkoutNewBranch(experimentName);
+        GitUtils::applyStashedChanges();
+
+    }
 
     std::string directoryName = "experiment-data/" + experimentName + "/";
     ofDirectory::createDirectory(directoryName);
     experimentData.serializeAll(directoryName, "experiment.json");
 
-    GitUtils::stageAllAndCommit(experimentName);
-    GitUtils::checkoutMaster();
-    GitUtils::popStashedChanges();
-
-    GitUtils::pushBranchToOriginInBackgroundThread(experimentName);
+    if(commitToBranch)
+    {
+        GitUtils::stageAllAndCommit(experimentName);
+        GitUtils::checkoutMaster();
+        GitUtils::popStashedChanges();
+        GitUtils::pushBranchToOriginInBackgroundThread(experimentName);
+    }
 
     showLogWindow = false;
 }
