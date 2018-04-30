@@ -8,6 +8,8 @@
 #include "serializable.h"
 #include "point_selector.h"
 #include "beam_tweaker.h"
+#include <iostream>
+#include <fstream>
 
 class BeamSkeleton : public ISerializable
 {
@@ -24,7 +26,7 @@ public:
 	void injectGUI();
 
 	void serialize(ofxJSONElement &root) const override;
-
+	void writeSkeletonToCSV(std::string path) const;
 	void deserialize(const ofxJSONElement &root) override;
 
 	std::string getUniqueId() const override;

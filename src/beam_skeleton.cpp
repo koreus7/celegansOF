@@ -514,6 +514,25 @@ void BeamSkeleton::serialize(ofxJSONElement &root) const
 	root["skeletonPoints"] = skeletonObj;
 }
 
+void BeamSkeleton::writeSkeletonToCSV(std::string path) const
+{
+    ofstream myfile;
+    myfile.open (path);
+
+    myfile.precision(30);
+    myfile.setf(ios_base::fixed);
+
+    for(int i = 0; i < polyLine.size(); i++)
+    {
+        ofPoint p = polyLine[i];
+
+        myfile << p.x << "," << p.y << std::endl;
+    }
+
+    myfile.close();
+
+}
+
 void BeamSkeleton::deserialize(const ofxJSONElement &root)
 {
 	if(root.isMember("skeletonPoints"))

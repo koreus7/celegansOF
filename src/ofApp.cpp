@@ -5,7 +5,8 @@
 #include "time_utils.h"
 #include "git_utils.h"
 #include "ofxOpenCv.h"
-
+#include <iostream>
+#include <fstream>
 
 
 bool themeSet = false;
@@ -154,31 +155,39 @@ void ofApp::draw() {
             {
                 //experimentData.deserializeFromFile(seriesFileNameBuffer);
 
-                for(int i = 0; i < 10; i++)
+                for(int i = 0; i < 20; i++)
                 {
-                    previewImages[0] = loadFromPath("One_" + std::to_string(i) + ".jpg");
+                    for(int j = 0; j < 15; j++)
+                    {
 
-                    state.focusedImage = &previewImages[0];
+                        std::string imagePath = "/Users/user/DEV/celegans/exp1/Solo_"+ std::to_string(i) + "_" + std::to_string(j) + ".jpg";
+                        previewImages[0] = loadFromPath(imagePath);
 
-                    float actualWidth = beamSkeleton.parameters.beamWidth;
+                        state.focusedImage = &previewImages[0];
 
-                    beamSkeleton.parameters.beamWidth*=2;
+                        float actualWidth = beamSkeleton.parameters.beamWidth;
 
-                    beamSkeleton.fitImage(*state.focusedImage);
+                        beamSkeleton.parameters.beamWidth*=2;
 
-                    while(!beamSkeleton.isFitDone()) {
+                        beamSkeleton.fitImage(*state.focusedImage);
 
-                        beamSkeleton.step();
+                        while(!beamSkeleton.isFitDone()) {
+
+                            beamSkeleton.step();
+
+                        }
+
+                        beamSkeleton.parameters.beamWidth = actualWidth;
+                        beamSkeleton.tweak();
+
+                        //std::string name = "exp1_" + std::to_string(i);
+                        //strcpy(experimentMetaData.nameBuffer, name.c_str());
+
+                        beamSkeleton.writeSkeletonToCSV(imagePath + "_beam_skeleton.csv");
+
+                        //commitExperiment(false);
 
                     }
-
-                    beamSkeleton.parameters.beamWidth = actualWidth;
-                    beamSkeleton.tweak();
-
-                    std::string name = "exp1_" + std::to_string(i);
-                    strcpy(experimentMetaData.nameBuffer, name.c_str());
-
-                    commitExperiment(false);
 
                 }
 
